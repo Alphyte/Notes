@@ -1,0 +1,98 @@
+\section{Overview}
+
+\subsection{What is Linear Algebra?}
+\begin{itemize}
+    \item Linear: The structure of scalar multiplication and addition.
+    \item Algebra: Study of formal structures in math. Examples: Groups ($S_n$, $\mathrm{GL}(n, \bb F)$), Rings ($F[X]$, $\bb Z$), and Fields ($\bb R, \bb C$).
+\end{itemize}
+
+\subsection{What are Ordinary Differential Equations?}
+
+\subsection{What is the relation between them?}
+
+Solutions to ordinary differential equations form a linear vector space which is a subspace of certain function spaces.
+
+\subsection{Grading Policy}
+\begin{itemize}
+    \item HW: 0\%
+    \item Weekly Quiz: 20\%
+    \item Participation: 10\%
+    \item Midterms (2): 30\%
+    \item Final: 40\%
+\end{itemize}
+
+\subsection{Office Hours}
+Tuesday 12:30--1:30, Thursday 3--4.
+
+\chapter{Linear Algebra}
+
+\introtext{Class responses to ``What is a vector?'': \begin{enumerate}
+    \item Something with magnitude and direction.
+    \item A column of numbers.
+    \item An element of a vector space.
+    \item An ordered collection of magnitudes.
+\end{enumerate}}
+
+\section{Vectors in the real plane}
+
+Vectors are commonly defined as arrows on the plane, especially in elementary treatments. The following is a semi-formal treatment of this definition.
+
+In order to define vectors, we must first define what a directed segment is.
+
+\begin{definition}[Directed Segment]
+    A directed segment is a line segment between two points with a direction, which can be translated around the plane.\footnote{This is a very informal definition. Formally, we may view directed segments as ordered pairs of points in $\bb R^2$ where the translation operation is an $\bb R^2$-action on the set of directed segments.}
+\end{definition}
+
+If a segment starts on point $A$ and ends on point $B$, then we call that directed segment $\vv{AB}$. Now, we can define vectors using these directed segments.
+
+\begin{definition}[Vector]
+    Vectors are equivalence classes of directed segments modulo translation. What this means is that if one segment can be translated such that it is equal to another segment, then those segments represent the same vector.
+\end{definition}
+
+Now, we can define some basic operations and properties on these vectors.
+
+\begin{enumerate}
+    \item Vector addition: Given two vectors $u$ and $v$, we define $u + v$ by choosing directed segments $\vv{AB}$ and $\vv{CD}$ that represent vectors $u$ and $v$, respectively, such that $B = C$. Then, we can concatenate these segments into $\vv{AC}$, then taking the equivalence class $[\vv{AC}]$ to be the sum.
+    
+    \item Scalar multiplication: Given a vector $v$ and a scalar $\lambda$, we can define scalar multiplication by integers by adding the vector multiple times to itself, and negation as being reflection. Multiplication by rational and irrational numbers are harder to define intuitively, however, it can be defined formally on a vector $[\vv{AB}]$ by $\lambda[\vv{AB}] = [\vv{A'B'}]$ where $A' = \lambda A$ and $B' = \lambda B$.
+    
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[auto]
+            \coordinate[label=left:{$A$}] (A) at (0, 0);
+            \coordinate[label=above:{$B$}] (B) at (2, 1);
+            \coordinate[label=right:{$C$}] (C) at (3, -0.5);
+            \draw[-Stealth] (A) to node {$\vv{AB}$} (B);
+            \draw[-Stealth] (B) to node {$\vv{BC}$} (C);
+            \draw[-Stealth] (A) to node [swap] {$\vv{AC}$} (C);
+        \end{tikzpicture}
+        \caption{Concatenation of Directed Segments}
+    \end{figure}
+
+    \item Vector multiplication? In general, there is no good way to multiply vectors. However, in this example, we can identify $\bb R^2$ with $\bb C$ and define multiplication in that fashion, although this method does not generalize. Vector spaces with a notion of multiplication are called \textit{algebras}.
+    
+    \item Linear combinations: If $u, v$ are vectors and $a, b \in \mathbb R$, then $au + bv$ is a linear combination of $u$ and $v$.
+    
+    \item Inner product\footnote{Note: Not all vector spaces have an inner product. Also note that in general, the inner product is defined first, then the norm (magnitude) of the vector is defined as $\sqrt{\braket{v}{v}}$}: A way to ``multiply" two vectors to output a scalar, we can define $\bra{v}\ket{u} \in \mathbb R$ as $\abs{u}\abs{v}\cos(\theta)$, where $\abs{u}$ is the length of a directed segment that represents $u$, and $\theta$ being the angle between representatives of $u$ and $v$ whose starting points are equal. This satisfies bilinearity (linear in both inputs), which means $\braket{au}{w} = a\braket{u}{v}$, and $\braket{u + v}{w} = \braket{u}{w} + \braket{v}{w}$, with analogous identities for the second input.
+    
+    \item Bases: The standard basis $e_1$ and $e_2$ are represented the unit directed segments pointing to the right and up. Any vector can be written as a linear combination of these two basis vectors. This basis is also orthonormal, i.e. their inner product is $0$ and their lengths are $1$. 
+    
+    In general, a basis in $\mathbb R^2$ is a set of two vectors that satisfies the property where any vector in $\mathbb R^2$ can be written as a linear combination of those two vectors. In addition, one can prove that as long as two vectors aren't pointing in the exact same or opposite directions, they form a basis.
+    
+    \item Coordinates: In order to give a vector coordinates (numerical representation), we must specify a basis. After we have specified a basis $e_1, e_2$, vector $v$ has coordinates $(a_1, a_2)$ if $v = a_1e_1 + a_2e_2$.
+\end{enumerate}
+
+A special fact about orthonormal bases is that the coordinates of a vector with respect to such a basis corresponds with the inner product of the vector with elements of the basis. This makes it straightforward to compute coordinates as long as you have a formula for the inner product.
+
+\begin{theorem}
+    For an orthonormal basis $e_1, e_2$, we have $v = \bra{v}\ket{e_1}e_1 + \bra{v}\ket{e_2}e_2$.
+\end{theorem}
+
+\begin{proof}
+    $v$ can be decomposed into $ae_1 + be_2$, and thus \begin{align*}
+        \braket{ae_1 + be_2}{e_1}e_2 + \braket{ae_1 + be_2}{e_2}e_2 &= \braket{ae_1}{e_1}e_1 + \braket{be_2}{e_1}e_1 + \braket{ae_1}{e_2}e_2 + \braket{be_2}{e_2}e_2\\
+        &= a\braket{e_1}{e_1}e_1 + b\braket{e_2}{e_1}e_1 + a\braket{e_1}{e_2}e_2 + b\braket{e_2}{e_2}e_2\\
+        &= (a \cdot 1)e_1 + (b \cdot 0)e_1 + (a \cdot 0)e_2 + (b \cdot 1)e_2\\
+        &= ae_1 + be_2.
+    \end{align*}
+\end{proof}

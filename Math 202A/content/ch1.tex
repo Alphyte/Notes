@@ -1,0 +1,72 @@
+\section*{Administrative Matters}
+Midterm date options:
+\begin{enumerate}
+    \item Fri Oct 14
+    \item Mon Oct 17
+    \item Wed Oct 19
+\end{enumerate}
+
+Weekly psets due Friday midnight.
+
+\chapter{General Topology}
+
+\section{Metric Spaces}
+
+
+\begin{definition}[Metric Space]
+    A metric on a set $X$ is a function $d\colon X^2 \to \bb R_{\ge 0}$ such that
+    \begin{enumerate}
+        \item $d(x, y) = 0$ if and only if $x = y$.
+        \item $d(x, y) = d(y, x)$.
+        \item $d(x, z) \le d(x, y) + d(y, z)$.
+    \end{enumerate}
+
+    $(X, d)$ is then called a metric space.
+\end{definition}
+
+If condition 1 is omitted and replaced only with the condition that $d(x, x) = 0$, then $d$ is called a semimetric (or quasimetric). If distances are allowed to be infinite, then $d$ is called an extended metric.
+
+If $(X, d)$ is a semimetric space, then if we define a relation $\sim$ such that $x \sim y$ iff $d(x, y) = 0$, it is an equivalence relation. In this case, $d$ ``drops'' to a metric on the equivalence classes $X/\!\sim$. To show this, we just need to prove that $\tilde d([x], [y]) = d(x, y)$ is a well-defined function, which utilizes the triangle inequality.
+
+\begin{example}
+    If $G$ is a connected weighted graph, then we can define a metric on $G$ by defining the distance between two vertices to be the length of the minimal path connecting them.
+
+    If $G$ is unconnected, by assigning the distance of infinity between points in separate components, we define a extended metric.
+\end{example}
+
+\begin{definition}[Norm]
+    If $V$ is a vector space then $\norm{\cdot}\colon V \to \bb R_{\ge 0}$ is a norm on $V$ if 
+    \begin{enumerate}
+        \item $\norm{v} = 0$ iff $v = 0$
+        \item $\norm{\lambda v} = \abs{\lambda}\norm{v}$
+        \item $\norm{v + w} \le \norm{v} + \norm{w}$
+    \end{enumerate}
+\end{definition}
+
+A norm on $V$ clearly induces a metric on $V$ by defining $d(v, w) = \norm{v - w}$. 
+
+\begin{example}[Euclidean metric]
+    The real line $\bb R$ and the euclidean spaces $\bb R^n$ with the euclidean metric $d(x, y) = \norm{x - y}_2$.
+\end{example}
+
+\begin{example}[$p$-norms]
+    The $p$-norms $\norm{(x_1, \dots, x_n)}_p = \qty(\sum x_i^p)^{1/p}$ induce a metric on $\bb R^n$.
+\end{example}
+
+\begin{definition}[Restricted metric]
+    If $(X, d)$ is a metric space and $Y$ is a subset of $X$, then we can restrict $d$ to $Y$ and $d\vert_Y$ is a metric on $Y$.
+\end{definition}
+
+It is common to consider the restriction of the Euclidean metric onto subsets of Euclidean space.
+
+\begin{example}[$L^p$ norms]
+    If $V = \mc C^0([0, 1])$, then examples of norms on $V$ include 
+    \begin{enumerate}
+        \item $\norm{f}_\infty = \sup{\abs{f(t)}}$.
+        \item $\norm{f}_1 = \int_0^1 \abs{f(t)} \dd{t}$
+        \item $\norm{f}_2 = \qty(\int_0^1 \abs{f(t)}^2 \dd{t})^{1/2}$
+        \item $\norm{f}_p = \qty(\int_0^1 \abs{f(t)}^p \dd{t})^{1/p}$ for $1 \le p < \infty$.\footnote{The $\infty$-norm can be viewed as the limit of the $p$-norms as $p \to \infty$.}
+    \end{enumerate}
+\end{example}
+
+This generalizes to bounded closed regions of $\bb R^n$, where all continuous functions are integrable. The proof that these are actually norms that satisfy the triangle inequality will come later (see the Minkowski and H\"older inequalities).

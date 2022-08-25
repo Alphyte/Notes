@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "Math H54"
+		},
+		{
+			"path": "Math 202A"
+		}
+	],
+	"settings": {
+		"latex-workshop.latex.recipe.default": "latexmk (lualatex)"
+	}
+}

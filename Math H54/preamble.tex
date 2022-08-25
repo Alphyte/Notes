@@ -1,0 +1,48 @@
+\usepackage{tikz}
+% \usepackage{xcharter-otf}
+\usepackage{amsthm, thmtools}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{esvect}
+\usepackage[%
+  colorlinks = true,
+  citecolor  = RoyalBlue,
+  linkcolor  = RoyalBlue,
+  urlcolor   = RoyalBlue,
+  unicode,
+  ]{hyperref}
+\usepackage{unicode-math}
+
+
+\usetikzlibrary {arrows.meta, positioning}
+
+\setmainfont{EB Garamond}
+\setmathfont{Garamond Math}
+
+\declaretheoremstyle[
+    spaceabove=10pt, spacebelow=10pt,
+    headfont=\normalfont\bfseries,
+    notefont=\mdseries, notebraces={(}{)},
+    bodyfont=\normalfont,
+    postheadspace=1em
+]{tstyle}
+
+\declaretheorem[style=tstyle, numberwithin=section]{theorem}
+\declaretheorem[style=tstyle, sibling=theorem]{lemma, proposition, corollary}
+
+\declaretheorem[style=tstyle, numberwithin=section]{definition}
+\declaretheorem[style=tstyle, numberwithin=section]{example}
+
+
+\newcommand{\bb}{\mathbb}
+\newcommand{\mc}{\mathcal}
+
+\newcommand{\introtext}[1]{\begin{center}
+  \begin{minipage}{0.5\textwidth}
+    \begin{small}
+      #1
+    \end{small}
+  \end{minipage}
+  \vspace{0.5cm}
+\end{center}}

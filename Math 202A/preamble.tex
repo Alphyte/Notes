@@ -1,0 +1,30 @@
+\usepackage{tikz}
+% \usepackage{xcharter-otf}
+\usepackage{amsthm, thmtools}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{unicode-math}
+
+
+\setmainfont{EB Garamond}
+\setmathfont{Garamond Math}
+
+\declaretheoremstyle[
+    spaceabove=10pt, spacebelow=10pt,
+    headfont=\normalfont\bfseries,
+    notefont=\mdseries, notebraces={(}{)},
+    bodyfont=\normalfont,
+    postheadspace=1em
+]{tstyle}
+
+\declaretheorem[style=tstyle, numberwithin=section]{theorem}
+\declaretheorem[style=tstyle, sibling=theorem]{lemma, proposition, corollary}
+
+\declaretheorem[style=tstyle, numberwithin=section]{definition}
+\declaretheorem[style=tstyle, numberwithin=section]{example}
+
+
+\newcommand{\bb}{\mathbb}
+\newcommand{\mc}{\mathcal}
