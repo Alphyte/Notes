@@ -10,8 +10,7 @@ Weekly psets due Friday midnight.
 
 \chapter{General Topology}
 
-\section{Metric Spaces}
-
+\section{Lecture 1: Metrics}
 
 \begin{definition}[Metric Space]
     A metric on a set $X$ is a function $d\colon X^2 \to \bb R_{\ge 0}$ such that
@@ -69,4 +68,55 @@ It is common to consider the restriction of the Euclidean metric onto subsets of
     \end{enumerate}
 \end{example}
 
-This generalizes to bounded closed regions of $\bb R^n$, where all continuous functions are integrable. The proof that these are actually norms that satisfy the triangle inequality will come later (see the Minkowski and H\"older inequalities).
+This generalizes to bounded closed regions of $\bb R^n$, where all continuous functions are integrable (due to compactness and the extreme value theorem). The proof that these are actually norms that satisfy the triangle inequality will come later (see the Minkowski and H\"older inequalities).
+
+\section{Lecture 2: Topology in Metric Spaces}
+
+\subsubsection*{Categories}
+
+Categories contain objects and morphisms, that satisfy the following properties:
+\begin{enumerate}
+    \item There is a morphism from any object $A$ to itself, called the identity $1_A$.
+    \item   
+\end{enumerate}
+
+Metric spaces can form a category under a few choices of collections of morphisms:
+\begin{itemize}
+    \item Isometries: $i\colon (X, d_X) \to (Y, d_Y)$ such that $d_X(x, y) = d_Y(i(x), i(y))$ for all $x, y$.
+    
+    Surjective isometries form a subcategory of the above category, ,where every map is an isomorphism.
+    \item Lipschitz maps: $f\colon (X, d_X) \to (Y, d_Y)$, where there exists a constant $C$ (which may depend on $f$), such that $d_Y(f(x), f(y)) \le Cd_X(x, y)$.
+    
+    We can also form the subcategory of bi-Lipschitz isomorphisms.
+    
+    \item Uniformly continuous maps: $f\colon (X, d_Y) \to (Y, d_Y)$ such that for all $\varepsilon > 0$ there exists $\delta > 0$ such that when $d_X(x, y) \le \delta$, then $d_Y(f(x), f(y)) < \varepsilon$.
+    \item Continuous maps: $f\colon (X, d_Y) \to (Y, d_Y)$ such that for all $x \in X$, for all $\varepsilon > 0$ there exists $\delta > 0$ such that when $d_X(x, y) \le \delta$, then $d_Y(f(x), f(y)) < \varepsilon$.
+\end{itemize}
+
+These conditions get weaker as we go down, and continuity can be generalized to non-metric spaces which gives rise to general topology. The study of uniformly continuous maps is much less common, but gives rise to uniformities.
+
+\begin{definition}[Convergence]
+    If $\qty{x_n}$ is a sequence in a metric space $(X, d)$, then $x_n \to x$ if $\forall \veps > 0,\, \exists N$ such that $n > N$ implies that $d(x_n, x)$.
+\end{definition}
+
+\begin{definition}[Cauchy sequence]
+    If $\qty{x_n}$ is a sequence in a metric space $(X, d)$, then $x_n \to x$ if $\forall \veps > 0,\, \exists N$ such that $n, m > N$ implies that $d(x_n, x_m)$.
+\end{definition}
+
+\begin{definition}[Completeness]
+    $(X, d)$ is complete if every cauchy sequence converges to a point.
+\end{definition}
+
+For any metric space that isn't complete, we want to form a ``completion" of it.
+
+\begin{definition}[Density]
+   If $S \subseteq X$, $S$ is dense if for all $x$ in $X$ and all $\veps < 0$ there exists $s \in S$ where $d(s, x) < \veps$.
+\end{definition}
+
+\begin{definition}[Completion]
+    A completion of a metric space $(X, d)$ is a metric space $(\overline X, \overline d)$ with an inclusion isometry $i \colon X \to \overline{X}$ such that the image of $i$ is dense in $\overline{X}$. In addition, $\overline{X}$ is a complete metric space.
+\end{definition}
+
+One way to define a completion for any metric space is by defining a semimetric $\tilde d$ on the set of Cauchy sequences $\mathrm{cs}(X, d)$, where $\tilde d\qty(\qty{x_n}, \qty{y_n}) = \lim_{n \to \infty} d(x_n, y_n)$, then by dropping that to a metric on the equivalence classes induced by the semimetric.
+
+We can just define $f \colon X \to \overline X$ as $f(x) = [\qty{x, x, x, \dots}]$. To show that $\overline X$ is complete, 
