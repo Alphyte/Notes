@@ -96,3 +96,88 @@ A special fact about orthonormal bases is that the coordinates of a vector with 
         &= ae_1 + be_2.
     \end{align*}
 \end{proof}
+
+\section{Conic Sections and Quadratic Forms}
+
+Conic sections are the intersections of a infinite double-cone by a plane. The ``shape'' generated is dependent on how tilted this plane is.
+
+\begin{itemize}
+    \item Flat plane: Circle
+    \item Slightly tilted: Ellipse
+    \item Tilted until parallel to slope of cone: Parabola
+    \item Tilted past slope of cone: Hyperbola
+\end{itemize}
+
+Ellipses on the plane can be defined by fixing two focal points (foci) and specifying a total length, then taking the set of all points such that the distances to the two foci sum to the total length specified.
+
+What's more interesting is that the intersection of a plane to the cone that generates an ellipse allows for two spheres that are tangent to both the plane and the cone, one below and one above the plane. The intersection between those spheres and the plane are the foci of the ellipse. Furthermore, the distance between the two circles of tangency along the cone is the total length. 
+
+Now, we define these objects algebraically:
+
+\begin{definition}[Double Cone]
+    The double-cone is defined in $\bb R^3$ as the set of points satisfying $x_1^2 + x_2^2 = x_3^2$.
+\end{definition}
+
+\begin{definition}[Plane]
+    A plane in $\bb R^3$ is the set of points satisfying $ax_1 + bx_2 + cx_3 = d$.
+\end{definition}
+
+Now, to consider the intersection, we consider the solution set to the \emph{system of equations} \[\begin{cases}
+    x_1^2 + x_2^2 = x_3^2\\
+    ax_1 + bx_2 + cx_3 = d.
+\end{cases}\]
+
+How do we solve this system? Substitution. Assuming $c \ne 0$, we can substitute $x_3 = -\frac{1}{c}(ax_1 + bx_2 - d)$ into the first equation and get a quadratic equation in two variables. We then get an equation of the form $Ax_1^2 + Bx_1x_2 + Cx_2^3 + Dx_1 + Ex_2 + F = 0$. This leads us to the following definition:
+
+\begin{definition}[Conic curve]
+    A conic curve in $\bb R^2$ is the solution set to $Ax_1^2 + Bx_1x_2 + Cx_2^3 + Dx_1 + Ex_2 + F = 0$.
+\end{definition}
+
+\begin{example}[Circle]
+    The equation $x_1^2 + x_2^2 - 1 = 0$ defines the unit circle and $(x_1/r)^2 + (x_2/r)^2 - 1 = 0 = x_1^2 + x_2^2 - r^2 = 0$ defines a circle of radius $r$.
+\end{example}
+
+\begin{example}[Ellipse]
+    The equation $(x_1/r_1)^2 + (x_2/r_2)^2 - 1 = 0$ defines a ellipse with radii $r_1, r_2$.  
+\end{example}
+
+\begin{example}[Hyperbola]
+    The standard hyperbola is defined as $x_1^2 - x_2^2 - 1 = 0$. Other hyperbolas include $x_1x_2 = 1$, or $x_2^2 - x_1^2 - 1 = 0$
+\end{example}
+
+\begin{example}[Parabola]
+    $x_1^2 = x_2$.
+\end{example}
+
+\begin{theorem}[Classification of conic sections]
+    From three basic examples (the unit circle, standard hyperbola, and $x_2 = x_1^2$), we can obtain ALL conic sections by affine linear transformations.
+\end{theorem}
+
+\subsubsection*{A short primer on matrix multiplication}
+
+If $A, B$ are matrices of dimensions $n \times \ell$ and $\ell \times m$, then $AB$ is a $n \times m$ matrix, with $(AB)_{ij} = \sum_{k = 1}^\ell A_{ik}B_{kj}$, where $M_{ij}$ is the element in the $i$th row and $j$th column of $M$.
+
+First, we must define what an affine linear transformation is, which requires defining what a regular linear transformation is.
+
+\begin{definition}[Linear transformation]
+    $T \colon \bb R^2 \to \bb R^2$ is a linear transformation if it can be expressed as a matrix where \[T\mqty(x_1 \\ x_2) = \mqty(a & b \\ c & d)\mqty(x_1 \\ x_2).\]
+\end{definition}
+
+That's kind of a non-intuitive definition. Here's another, more abstract and conceptual definition. This improved definition can also be generalized to any vector space in the domain, and any (not necessarily the same) vector space in the codomain. 
+
+\begin{definition}[Linear Transformation]
+    $T \colon \bb R^2 \to \bb R^2$ is a linear transformation if \begin{enumerate}
+        \item $T(cv) = cT(v)$.
+        \item $T(v + w) = T(v) + T(w)$.
+    \end{enumerate}
+    In other words, $T$ preserves the linear structure of the space.
+\end{definition}
+
+\begin{proposition}
+    These definitions are equivalent.
+\end{proposition}
+
+\begin{proof}
+    It is easy to verify that matrices produce linear transformations through simple computations. To prove that all linear transformations correspond with a matrix, we consider the action on basis vectors. If we fix a basis $v_1, v_2$, since $\smqty(x_1\\ x_2) = x_1v_1 + x_2v_2$, we have \[T\mqty(x_1\\ x_2) = T(x_1v_1 + x_2v_2) = T(x_1v_1) + T(x_2v_2) = x_1T(v_1) + x_2T(v_2).\] In this case, if $T(v_1) = \smqty(a_{11} \\ a_{21})$ and $T(v_2) = \smqty(a_{12} \\ a_{22})$, we then have \[T\mqty(x_1 \\ x_2) = T\mqty(a_{11} & a_{12} \\ a_{21} & a_{22})\mqty(x_1 \\ x_2).\]
+\end{proof}
+
