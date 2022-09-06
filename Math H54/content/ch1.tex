@@ -181,3 +181,30 @@ That's kind of a non-intuitive definition. Here's another, more abstract and con
     It is easy to verify that matrices produce linear transformations through simple computations. To prove that all linear transformations correspond with a matrix, we consider the action on basis vectors. If we fix a basis $v_1, v_2$, since $\smqty(x_1\\ x_2) = x_1v_1 + x_2v_2$, we have \[T\mqty(x_1\\ x_2) = T(x_1v_1 + x_2v_2) = T(x_1v_1) + T(x_2v_2) = x_1T(v_1) + x_2T(v_2).\] In this case, if $T(v_1) = \smqty(a_{11} \\ a_{21})$ and $T(v_2) = \smqty(a_{12} \\ a_{22})$, we then have \[T\mqty(x_1 \\ x_2) = T\mqty(a_{11} & a_{12} \\ a_{21} & a_{22})\mqty(x_1 \\ x_2).\]
 \end{proof}
 
+Now, we define affine transformations. But what does ``affine'' mean? Affine spaces like vector spaces with no origin, so you can't add or multiply, but only subtract.
+
+You can make an affine space from the vector space by ``forgetting the origin'', and a vector space from an office space by setting an origin. Subtraction, $- \colon \bb A^2 \times \bb A^2 \to \bb R^2$ gives a vector.
+
+\begin{definition}[Affine Linear Transformation]
+    An affine linear transformation is a transformation that preserves the affine structure. 
+\end{definition}
+
+Affine linear transformations are precisely linear transformations composed of a translation by a vector.
+
+\begin{theorem}
+    Any quadratic form $Q$ can be written in one of the following forms with a correct choice of coordinates
+    \begin{enumerate}
+        \item $x_1^2 + x_2^2$
+        \item $x_1^2 - x_2^2$
+        \item $x_1^2$ 
+        \item $0$
+    \end{enumerate} 
+\end{theorem}
+
+\begin{proof}
+    If $Q(x_1, x_2) = ax_1^2 + bx_1 + cx_2^2$, then assume $a \ne 0$. Then, we have \[Q(x_1, x_2) = a\qty(x_1 + \frac{b}{2a}x_2)^2 + \qty(c- \frac{b^2}{4a})x_2^2.\]
+
+    From this form, it is easy to convert into one of the preceding forms.
+\end{proof}
+
+As a corollary, you can prove the classification of conic sections theorem.
