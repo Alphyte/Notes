@@ -208,3 +208,95 @@ Affine linear transformations are precisely linear transformations composed of a
 \end{proof}
 
 As a corollary, you can prove the classification of conic sections theorem.
+
+\section{More on Linear Transformations in 2D}
+
+As a reminder, to find a matrix for a transformation $T$ with respect to a basis $e_1, e_2$, we have that $\mqty(Te_1 & Te_2) = \mqty(e_1 & e_2)M$, where $M$ is the matrix representing $T$ in this choice of basis. We then compute \[T(ae_1 + be_2) = T\mqty(e_1 & e_2)\mqty(a \\ b) = \mqty(e_1 & e_2)M\mqty(a \\ b)\]
+
+Examples of linear transformations include 
+\begin{enumerate}
+    \item Stretching: For example $T(e_1) = 2e_1$, $T(e_2) = \frac{1}{3}e_2$.
+    \item Projection: $T(e_1) = 0$, $T(e_2) = 1$.
+\end{enumerate}
+
+\subsection{Operations on Linear Transformations}
+
+\begin{definition}[Linear combination of transformations]
+    If $T_1$ and $T_2$ are linear maps $\bb R^2 \to \bb R^2$, then $c_1T_1 + c_2T_2$ is defined as the transformation such that \[(c_1T_1 + c_2T_2)v = c_1T_1(v) + c_2T_2(v).\]
+\end{definition}
+
+We can see that the matrix representation of $c_1T_1 + c_2T_2$ behaves exactly how we'd expect it to--that is, if $T_1, T_2$ are represented by $M_1$ and $M_2$, then $c_1T_1 + c_2T_2$ is represented by $c_1M_1 + c_2M_2$.
+
+\begin{definition}[Composition]
+    If $T_1, T_2$ are transformations then their composition $T_2 \circ T_1$ is the transformation making this diagram commutative \[ 
+        \begin{tikzcd}
+            \bb R^2 \arrow[r]{T_1} \arrow[rr, bend right = 30]& \bb R^2 \arrow[r] & \bb R^2
+        \end{tikzcd}
+    \]
+    In other words, it is the transformation defined as $(T_2 \circ T_1)(v) = T_2(T_1(v))$.
+\end{definition}
+
+The matrix representing the composition is the matrix product.
+
+\begin{definition}[Inverse]
+    A transformation is invertible if there exists an inverse. Concretely, if $T$ is a transformation, it is invertible if there exists a transformation $S$ such that $ST = TS = \mathrm{id}$. This transformation $S$ is denoted $T^{-1}$.
+\end{definition}
+
+How do we determine whether a transformation is invertible? And how do we compute the matrix of its inverse?
+
+\begin{definition}[Determinant]
+    The determinant of a matrix $\smqty(a & b \\ c & d)$, is defined as $\det\smqty(a & b \\ c & d) = ad - bc$.
+\end{definition}
+
+\begin{proposition}
+    A transformation $T$ is invertible iff $\det([T]) \ne 0$.
+\end{proposition}
+
+To compute the inverse of a matrix, we have \[\mqty(a & b \\ c & d)^{-1} = \frac{1}{ad - bc}\mqty(d & -b \\ -c & a)\]
+
+\subsection{Linear groups}
+
+Invertible transformations/matrices, along with the composition operation, satisfy the properties of a group. Composition is associative, and there exists an identity transformation/matrix represented as $\smqty(1 & 0 \\ 0 & 1)$. This group is denoted as $\mathrm{GL}(\bb R^2)$ if we consider transformations and $\mathrm{GL}(2, \bb R)$ for matrices.
+
+An important subgroup of these groups is the orthogonal group $\mathrm O(2)$. This consists of orthogonal transformations.
+
+\begin{definition}[Orthogonal transformation]
+    A transformation $O$ is orthogonal if $\braket{v}{w} = \braket{Ov}{Ow}$ for all vectors $v, w$. In other words, it preserves the inner product.
+\end{definition}
+
+\begin{proposition}
+    A transformation is orthogonal iff $O^\top O = I$.
+\end{proposition}
+
+\section{Orthogonal Transformations}
+
+The set of orthogonal transformations on $\bb R^2$ is denoted $\mathrm O(2)$.
+
+We first prove the following proposition:
+
+\begin{proposition}
+    If a transformation preserves norms in an inner product space, then it preserves the inner product.
+\end{proposition}
+
+\begin{proof}
+    $2\braket{u}{v} = \norm{u + v}^2 - \norm{u}^2 - \norm{v}^2$, so the left hand side is preserved if the right hand side is preserved.
+\end{proof}
+
+A few more properties about orthogonal transformations are listed below:
+\begin{proposition}
+    The matrix of an orthogonal transformation $M$ with respect to an orthonormal basis satisfies the property $M^\top M = I$.
+\end{proposition}
+
+\begin{proof}
+    We have that $\braket{Mv}{Mw} = \braket{v}{M^\top M w} = \braket{v}{w}$. Now, by using projections onto the orthonormal basis vectors, we can prove that $M^\top M = I$.
+\end{proof}
+
+A special subset of the orthogonal group is the special orthogonal group $\mathrm{SO}(2)$, which induces the additional constraint that $\det(O) = 1$, and consists of plane rotations about the origin.
+
+\subsection{Complex Numbers}
+
+The imaginary unit $i$ is defined as a solution of $x^2 + 1 = 0$, and the complex numbers are defined as numbers of the form $a + bi$.
+
+Multiplication is then easily defined as $(a + bi)(c + di) = ac - bd + (ad + bc)i$.
+
+Complex numbers have a length and an angle, and can be expressed in terms of the length and angle using the formula $e^{i\theta} = \cos(\theta) + i\sin(\theta)$. 
