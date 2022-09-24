@@ -300,3 +300,62 @@ The imaginary unit $i$ is defined as a solution of $x^2 + 1 = 0$, and the comple
 Multiplication is then easily defined as $(a + bi)(c + di) = ac - bd + (ad + bc)i$.
 
 Complex numbers have a length and an angle, and can be expressed in terms of the length and angle using the formula $e^{i\theta} = \cos(\theta) + i\sin(\theta)$. 
+
+We can see that the group $\mathrm{SO}(2)$ is isomorphic to the unit complex numbers under multiplication.
+
+\section{The Main Theorems of Linear Algebra}
+
+In linear algebra, we have four main theorems:
+
+\begin{itemize}
+    \item Rank Theorem
+    \item Inertia Theorem
+    \item Orthogonal Diagonalization Theorem
+    \item Jordan Normal Form
+\end{itemize}
+
+\begin{definition}[Classification Theorem]
+    Classification theorems in linear algebra seek to classify and find ``nice" representatives of the orbits of group actions.
+\end{definition}
+
+\begin{theorem}[Rank theorem]
+    Any linear equation of the form $y = Ax$ can be simplified by a change of variables into the form $\tilde y = M\tilde x$, where $M$ is a  block matrix of the form \[\mqty(I & 0 \\ 0 & 0).\]
+\end{theorem}
+
+\begin{theorem}[Inertia theorem]
+    Any quadratic form can be rewritten after a change of variables into the form $x_1^2 + \cdots + x_p^2 - x_{p + 1}^2 + \cdots + x_q^2$.
+\end{theorem}
+
+\begin{theorem}
+    
+\end{theorem}
+
+\begin{theorem}[Jordan Normal Form]
+    Any matrix can be rewritten as a change of variables into a diagonal block matrix consisting of Jordan blocks, which are of the form \[\mqty(\lambda & 1 &  & 0\\
+    & \ddots & \ddots & \\
+    & & \lambda & 1 \\ 0 & & & \lambda )\]
+\end{theorem}
+
+\section{Matrices in Higher Dimensions}
+
+If $A$ is a matrix, we use $A_{ij}$ to refer to the $i$th row and $j$th column of the matrix.
+
+Then, we are able to define operations on matrices:
+
+\begin{definition}[Transpose]
+    The transpose of a $m \times n$ matrix $A$, denoted by $A^\top$, is the $n \times m$ matrix defined by $(A^\top)_{ij} = A_{ji}$.
+\end{definition}
+
+\begin{definition}[Multiplication]
+    If $A$ is a $n \times m$ matrix and $B$ is a $m \times \ell$ matrix, then $AB$ is a $n \times \ell$ matrix with $(AB)_{ij} = A_{i1}B_{1j} + \cdots + A_{im}B_{mj}$. Using summation, we have that \[(AB)_{ij} = A_{ik}B_{kj} = \sum_{k = 1}^m A_{ik}B_{kj}.\]
+\end{definition}
+
+Why do we define multiplication of matrices like this? Multiplication of matrices correspond to compositions of linear transformations. An example of an application is a neural network, where ``neurons'' activity is based off matrices, and these are composed to get a final result.
+
+\subsection{Determinant}
+
+\begin{definition}[Determinant]
+    If $A$ is an $n \times n$ matrix, then the determinant of $A$, is a number defined as follows: \[\det(A) = \sum_{\sigma \in S_n} \mathrm{sgn}(\sigma)\prod_{i = 1}^n A_{i\sigma(i)}.\]
+\end{definition}
+
+$S_n$ denotes the symmetric group on $n$ elements, or the permutations of $n$ elements, which has size $n!$. $\mathrm{sgn}(\sigma)$ is the ``sign'' of the permutation, which is $1$ if the permutation swaps the order of an even number of elements and $-1$ otherwise.
