@@ -608,5 +608,19 @@ The proof of this theorem also requires AC, in the form of
 
     Now, for any $\alpha \in \mc A$, we have the continuous projection $\pi_\alpha\colon X \to X_\alpha$, now we claim that for any $\mc D \in W_{\mc C}$, the set of $\qty{\pi_\alpha(A) \mid A \in \mc D}$ has FIP since if $x \in \bigcap A_j$, then $\pi_\alpha(x) \in \bigcap \pi_\alpha(A_j)$. We also trivially have that the closures $\ol{\pi_\alpha(A)}$ has the FIP. Now, applying to $\mc D^*$, we have that $\bigcap_{A \in \mc D^*} \ol{\pi_\alpha(A)}$ is nonempty since $X_\alpha$ is compact.
 
-    Now, applying AC, we can pick $x \in X$ where $\pi_\alpha(x) \in \bigcap_{A \in \mc D^*} \ol{\pi_\alpha(A)}$. Now, we prove that $x \in \ol A$ for all $A \in \mc D^*$, using the subbase of the product topology. If we let $U = \pi_\alpha^{-1}(U_\alpha)$, then $x \in U$ implies that $U \cap A \ne 0$ for all $A \in \mc D^*$, since we have $x_\alpha \in \ol{\pi_\alpha(A)}$ and $U_\alpha$, then $\pi_\alpha(U_\alpha) \cap U_\alpha$ must be nonempty otherwise $\ol{\pi_\alpha(A)}$ would not contain $x_\alpha$.
+    Now, applying AC, we can pick $x \in X$ where $\pi_\alpha(x) \in \bigcap_{A \in \mc D^*} \ol{\pi_\alpha(A)}$. Now, we prove that $x \in \ol A$ for all $A \in \mc D^*$, using the subbase of the product topology. If we let $U = \pi_\alpha^{-1}(U_\alpha)$, then $x \in U$ implies that $U \cap A \ne 0$ for all $A \in \mc D^*$, since we have $x_\alpha \in \ol{\pi_\alpha(A)}$ and $U_\alpha$, then $\pi_\alpha(A) \cap U_\alpha$ must be nonempty otherwise $\ol{\pi_\alpha(A)}$ would not contain $x_\alpha$. This implies that $\pi^{-1}(U_\alpha)$ has nonempty intersection with any set in $\mc D^*$, and thus belongs to $\mc D^*$.
+
+    Now, by the first property of $\mc D^*$, then we have that finite intersections $\bigcap \pi_\alpha^{-1}(U_{\alpha_i})$ are in $\mc D^*$, thus $\mc D^*$ contains a neighborhood base of $\mc D^*$. Now, if $x \in U$ open in $X$, then there exists an open set $V$ in $\mc D^*$. Thus, for all $A \in \mc D^*$, we have that $x \in \ol A$. Finally, this results in the fact that $x$ is contained in $\bigcap \mc C$.
+\end{proof}
+
+This theorem has applications in 202B, such as the Aloglu theorem (unit ball in weak-* topology is compact), and when considering locally compact spaces and $\beta$-compactifications.
+
+Now, we consider the following interesting result 
+
+\begin{theorem}[Kelley]
+    Tychonoff's Theorem is equivalent to AC.
+\end{theorem}
+
+\begin{proof}
+    The reverse implication was proven above, and now if we assume Tychonoff's theorem, we need to show that $\prod X_\alpha$ is nonempty. We can take $\omega = \bigcup X_\alpha$ which is not in $\bigcup X_\alpha$ due to regularity. Now, if $Y_\alpha = X_\alpha \cup \qty{\omega}$, we can take $\mc T_\alpha = \qty{Y_\alpha, \emptyset, T_\alpha, \qty{\omega}}$, which is compact since there are finitely many open sets. The product $Y = \prod Y_\alpha$ is compact due to Tychonoff's theorem. If $F_\alpha = \pi_\alpha^{-1}(X_\alpha)$, then $F_\alpha$ is closed, and has the FIP, since for finite intersections $\bigcap F_{\alpha_i}$, we can consider $x_{\alpha_i} = F_{\alpha_i}$, and $x_\alpha = \omega$ otherwise. Thus due to compactness we have $\bigcap F_\alpha = \prod X_\alpha \ne \emptyset$, which proves the equivalence.
 \end{proof}
