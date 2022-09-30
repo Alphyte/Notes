@@ -1,0 +1,166 @@
+\chapter{Compactness}
+
+\begin{definition}[Open Cover, Subcover]
+    If $X$ is a topological space, by an open cover we mean a collection $\mathcal C = \qty{U_\alpha}$ of open sets such that $\bigcup \mathcal C = X$.
+
+    By a subcover of $\mc C$, we mean a collection $\mc D \subseteq \mc C$ where $\bigcup \mc D = X$.
+\end{definition}
+
+\begin{definition}[Compactness]
+    $X$ is compact if and only if every open cover has a finite subcover. If $A \subseteq X$, then $A$ is compact if $A$ is compact in its relative topology.
+\end{definition}
+
+\begin{proposition}
+    $A$ is compact iff for any collection $\mc E$ of open sets such that $\bigcup \mc E \supseteq A$, there is a finite subset $\mc S \subseteq \mc E$ that also covers $A$, that is, $\bigcup \mc S \supseteq A$. 
+\end{proposition}
+
+\begin{proposition}
+    Any closed subset of a compact space is compact.
+\end{proposition}
+
+\begin{proof}
+    If $\mc E$ is covers $A \subseteq X$, then $\mc E \bigcup \qty{A'}$ covers $X$, so we find a finite subcover and take out $A'$.
+\end{proof}
+
+Note that the converse is not true: Any subset of a space with the indiscrete topology is compact. However, when $X$ is Hausdorff, then this holds:
+
+\begin{proposition}
+    If $X$ is Hausdorff, then if $A \subseteq X$ is compact, then for all $x \notin A$, then there exist disjoint open sets $U$ and $V$ such that $A \in U$ and $x \in V$.
+\end{proposition}
+
+\begin{proof}
+    If $x$ is in the complement of $A$, for all $y \in A$ we can find disjoint open sets $U_y, V_y$ with $x\in U_y$ and $y \in V_y$. Then $V_y$ covers $A$, and we can find a finite subcover $V_{y_k}$, $1 \le k \le n$. Then, we have $\bigcap U_{y_k}$ is an open set that contains $X$ and does not intersect $\bigcup V_{y_k}$, which is an open set containing $x$.
+\end{proof}
+
+We get two immediate corollaries:
+
+\begin{corollary}
+    \label{prop:compsuboft2closed}
+    Any compact subset of a Hausdorff space is closed.
+\end{corollary}
+
+\begin{corollary}
+    Any compact Hausdorff space is regular ($T_3$), i.e. for any closed set $A \subset X$, and any $x \notin A$, we have disjoint open sets $U, V$ such that $A \subset U$ and $x \in V$.
+\end{corollary}
+
+We can prove a slightly stronger statement: 
+
+\begin{corollary}
+    Any compact Hausdorff space is normal ($T_4$).
+\end{corollary}
+
+\begin{proof}
+    If $A$ and $B$ are disjoint closed sets in a compact Hausdorff space $X$, then for any $y \in B$ there are disjoint open sets $U_y, V_y$ such that $A \subseteq V_y$ and $y \in U_y$, and we can find a finite subcover $U_{y_k}$ of the open cover $U_y$ of $B$, Now, we let $U = \bigcup U_{y_k}$ and $V = \bigcap V_{y_k}$ and we have $U$ disjoint from $V$, where $B \subseteq U$ and $A \subseteq V$. 
+\end{proof}
+
+Now, we examine maps on compact spaces.
+
+\begin{proposition}
+    \label{prop:imcompiscomp}
+    If $X$ is compact and $f \colon X \to Y$, then $f(X)$ is compact.
+\end{proposition}
+
+\begin{proof}
+    WLOG assume that $Y = f(X)$. If $\mc C$ is an open cover of $f(Y)$, then if $\mc C'$ is the set of preimages of sets in $\mc C$, then $\mc C'$ is an open cover of $X$, which we can take a finite subcover $\mc S' = \qty{f^{-1}(O_1), \dots, f^{-1}(O_n)}$, then we have that $\mc S = \qty{O_1, \dots, O_n}$ is a finite subcover of $Y$. 
+\end{proof}
+
+\begin{corollary}[Extreme Value Theorem]
+    If $f \colon \bb R \to \bb R$ is continuous on an interval $[a, b]$, then $f$ has a maximum on $[a, b]$ and attains it on $[a, b]$. 
+\end{corollary}
+
+\begin{proposition}
+    If $f\colon X \to Y$ for $X$ compact and $Y$ Hausdorff, then if $f$ is bijective, then it is a homeomorphism.
+\end{proposition}
+
+\begin{proof}
+    Images of closed sets are closed due to \autoref{prop:imcompiscomp} and \autoref{prop:compsuboft2closed}.
+\end{proof}
+
+We can give an alternative characterization of compactness using closed sets.
+
+\begin{proposition}
+    $X$ is compact iff for any collection of closed sets has the finite intersection property, the intersection is nonempty.
+\end{proposition}
+
+\section{Tychonoff's Theorem}
+
+We first state Tychonoff's theorem:
+
+\begin{theorem}[Tychonoff's Theorem]
+    \label{thm:tychonoff}
+    If $\qty{X_\alpha}$ are a collection of compact spaces, then the space $\prod_\alpha X_\alpha$ is compact.
+\end{theorem}
+
+It is clear that this requires the Axiom of Choice, as $\prod_\alpha X_\alpha$ may be empty without it. It is also interesting that Tychonoff's Theorem implies AC, although Tychonoff's Theorem for Hausdorff compact spaces does not imply AC.
+
+The proof of this theorem also requires AC, in the form of 
+
+\begin{theorem}[Zorn's Lemma]
+    \label{thm:zorn}
+    If $P$ is a poset, then if any chain $C$ (totally ordered subset) in $P$ has an upper bound in $P$, then $P$ has a maximal element. (We call $P$ inductively ordered).
+\end{theorem}
+
+\nameref{thm:zorn} has wide applications across many fields, such as in the proof that every vector space has a basis, or that every proper ideal is contained in a maximal ideal.
+
+\begin{definition}
+    For any set $X$, a filter on $X$ is a collection $\mc F$ of nonempty subsets that is closed under intersections, and where all supersets of a set in the filter is also in the filter.
+
+    An ultrafilter is a maximal filter.
+\end{definition}
+
+\begin{proof}[Proof of \nameref{thm:tychonoff}]
+    If $\alpha \in \mc A$ indexes a family of compact spaces $X_\alpha$, then if $X = \prod X_\alpha$, then let $\mc C$ be a collection of closed subsets of $X$ with the finite intersection property. If $W_{\mc C}$ is the collection of families $\mc D$ of subsets of $X$ such that $\mc C \subseteq \mc D$ and such that $\mc D$ has FIP.
+
+    Now, we show that $W_{\mc C}$ is inductively ordered: If $\Phi$ is a chain in $W_C$, then if $ \mc D_\Phi = \bigcup \Phi$, then let $A_1, \dots, A_n \in \mc D_\phi$, then $A_i \in \mc D_{\alpha_i}$, which we can just find the maximal index out of the $\alpha_i$, which we call $\alpha_0$. Then, $A_i \in \alpha_0$ for all $i$, which proves that $\bigcap A_i$ has nonempty intersection.
+
+    We can then use Zorn's Lemma to obtain a maximal element $\mc D^*$ in $W_{\mc C}$. Now, we can see that $\mc D^*$ is closed under finite intersections because it is maximal. In addition, we also have that if $B \cap A \ne \emptyset$ for all $A \in \mc D^*$, then $B \in \mc D^*$, again due to maximality (we can use the previous property to prove this statement).
+
+    Now, for any $\alpha \in \mc A$, we have the continuous projection $\pi_\alpha\colon X \to X_\alpha$, now we claim that for any $\mc D \in W_{\mc C}$, the set of $\qty{\pi_\alpha(A) \mid A \in \mc D}$ has FIP since if $x \in \bigcap A_j$, then $\pi_\alpha(x) \in \bigcap \pi_\alpha(A_j)$. We also trivially have that the closures $\ol{\pi_\alpha(A)}$ has the FIP. Now, applying to $\mc D^*$, we have that $\bigcap_{A \in \mc D^*} \ol{\pi_\alpha(A)}$ is nonempty since $X_\alpha$ is compact.
+
+    Now, applying AC, we can pick $x \in X$ where $\pi_\alpha(x) \in \bigcap_{A \in \mc D^*} \ol{\pi_\alpha(A)}$. Now, we prove that $x \in \ol A$ for all $A \in \mc D^*$, using the subbase of the product topology. If we let $U = \pi_\alpha^{-1}(U_\alpha)$, then $x \in U$ implies that $U \cap A \ne 0$ for all $A \in \mc D^*$, since we have $x_\alpha \in \ol{\pi_\alpha(A)}$ and $U_\alpha$, then $\pi_\alpha(A) \cap U_\alpha$ must be nonempty otherwise $\ol{\pi_\alpha(A)}$ would not contain $x_\alpha$. This implies that $\pi^{-1}(U_\alpha)$ has nonempty intersection with any set in $\mc D^*$, and thus belongs to $\mc D^*$.
+
+    Now, by the first property of $\mc D^*$, then we have that finite intersections $\bigcap \pi_\alpha^{-1}(U_{\alpha_i})$ are in $\mc D^*$, thus $\mc D^*$ contains a neighborhood base of $\mc D^*$. Now, if $x \in U$ open in $X$, then there exists an open set $V$ in $\mc D^*$. Thus, for all $A \in \mc D^*$, we have that $x \in \ol A$. Finally, this results in the fact that $x$ is contained in $\bigcap \mc C$.
+\end{proof}
+
+This theorem has applications in 202B, such as the Aloglu theorem (unit ball in weak-* topology is compact), and when considering locally compact spaces and $\beta$-compactifications.
+
+Now, we consider the following interesting result 
+
+\begin{theorem}[Kelley]
+    Tychonoff's Theorem is equivalent to AC.
+\end{theorem}
+
+\begin{proof}
+    The reverse implication was proven above, and now if we assume Tychonoff's theorem, we need to show that $\prod X_\alpha$ is nonempty. We can take $\omega = \bigcup X_\alpha$ which is not in $\bigcup X_\alpha$ due to regularity. Now, if $Y_\alpha = X_\alpha \cup \qty{\omega}$, we can take $\mc T_\alpha = \qty{Y_\alpha, \emptyset, T_\alpha, \qty{\omega}}$, which is compact since there are finitely many open sets. The product $Y = \prod Y_\alpha$ is compact due to Tychonoff's theorem. If $F_\alpha = \pi_\alpha^{-1}(X_\alpha)$, then $F_\alpha$ is closed, and has the FIP, since for finite intersections $\bigcap F_{\alpha_i}$, we can consider $x_{\alpha_i} = F_{\alpha_i}$, and $x_\alpha = \omega$ otherwise. Thus due to compactness we have $\bigcap F_\alpha = \prod X_\alpha \ne \emptyset$, which proves the equivalence.
+\end{proof}
+
+\section{Totally Bounded Sets}
+
+\begin{definition}
+    We say a metric space $(X, d)$ is \textbf{totally bounded} if for all $\veps > 0$, there exists a finite set $\qty{x_i}$ such that \[X = \bigcup_{i = 1}^n B_\veps(x_i).\]
+\end{definition}
+
+It is trivial that compactness implies totally bounded. We now prove a partial converse:
+
+\begin{theorem}
+    Complete and totally bounded metric spaces are compact.
+\end{theorem}
+
+\begin{proof}
+\end{proof}
+
+We can now study compact sets in $\mathrm{BC}(X, M)$ with the $d_\infty$ metric, where $X$ is a topological space and $M$ is a complete metric space. These correspond precisely to the totally bounded sets.
+
+\begin{definition}
+    If $X$ is a topological space and $(M, d)$ is a metric space, then a family of functions $\mc F \subseteq \mathrm C(X, M)$ is \textbf{equicontinuous at a point $x$} if for any $\veps > 0$, there exists an open neighborhood $\mc O$ such that $d(f(y), f(x)) < \veps$ whenever $y \in \mc O$.
+
+    We say $\mc F$ is \textbf{equicontinuous} if it is equicontinuous at all points in $X$.
+\end{definition}
+
+\begin{theorem}[Arzela-Ascoli]
+    Let $X$ and $M$ be as above, and let $X$ be compact. If $\mc F \subseteq \mathrm{BC}(X, M)$ with $\mc F$ pointwise totally bounded, and equicontinuous, then $\mc F$ is totally bounded.
+\end{theorem}
+
+\begin{proof}
+    If $\veps > 0$ is given, for each $x$ there is an open set $O_x$ such that $y \in O_x$, then $d(f(y), f(x)) < \veps/4$. By compactness, there are $x_1, \dots, x_n$ such that \[X = \bigcup_{i = 1}^n O_{x_i}.\] Now, for each $j$, the set $I_j = \qty{f(x_j) \mid f \in \mc F}$ is totally bounded, so if we choose $S_j$ to be a finite subset of $I_j$ that is $\veps/4$-dense in $I_j$. We can then take $S = \bigcup S_j$. Now, if we let $\Psi= \qty{\psi \colon \qty{1, \dots, n} \to S}$, which is finite, then 
+\end{proof}

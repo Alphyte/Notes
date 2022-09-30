@@ -1,12 +1,16 @@
 \usepackage{tikz}
 % \usepackage{xcharter-otf}
 \usepackage{amsthm, thmtools}
+\usepackage[margin=0.5in]{geometry}
 \usepackage{mathtools}
 \usepackage{physics}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{unicode-math}
+\usepackage{xcharter-otf}
 
+
+\geometry{margin=3in}
 \usepackage[%
   colorlinks = true,
   citecolor  = RoyalBlue,
@@ -14,8 +18,8 @@
   urlcolor   = RoyalBlue,
   unicode]{hyperref}
 
-\setmainfont{EB Garamond}
-\setmathfont{Garamond Math}
+% \setmainfont{EB Garamond}
+% \setmathfont{Garamond Math}
 
 \declaretheoremstyle[
     spaceabove=5pt, spacebelow=5pt,
@@ -25,11 +29,11 @@
     postheadspace=1em
 ]{tstyle}
 
-\declaretheorem[style=tstyle, numberwithin=section]{theorem}
+\declaretheorem[style=tstyle, numberwithin=chapter]{theorem}
 \declaretheorem[style=tstyle, sibling=theorem]{lemma, proposition, corollary}
 
-\declaretheorem[style=tstyle, numberwithin=section]{definition}
-\declaretheorem[style=tstyle, numberwithin=section]{example}
+\declaretheorem[style=tstyle, numberwithin=chapter]{definition}
+\declaretheorem[style=tstyle, numberwithin=chapter]{example}
 
 
 \newcommand{\bb}{\mathbb}

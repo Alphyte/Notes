@@ -1,0 +1,129 @@
+\chapter{Functions into the Reals}
+
+The following are properties of topological spaces that can kind of categorize how ``nice'' they are.
+
+\begin{definition}[Hausdorff ($T_2$)]
+    A space $X$ is Hausdorff if for all $x \ne y$, there exist disjoint open sets $U, V$ such that $x \in U$ and $y \in V$.
+\end{definition}
+
+\begin{definition}[Normal ($T_4$)]
+    A space $X$ is Hausdorff if for all pairs of disjoint closed subsets $C_1, C_2$, there exist disjoint open sets $O_1, O_1$ such that $C_1 \subseteq O_1$ and $C_2 \subseteq C_2$.
+\end{definition}
+
+\section{Urysohn's Lemma}
+
+It can easily be seen that all metric spaces are Hausdorff, but it is also the case that metric spaces are normal. How do we prove this? We first consider the following important theorem:
+
+\begin{theorem}[Urysohn's Lemma]
+    \label{thm:urysohnlemma}
+    If $X$ is a normal space, then for any disjoint closed subsets $C_0, C_1$ there exists a continuous function $f\colon X \to [0, 1]$ where $f(C_0) = 0$ and $f(C_1) = 1$.
+\end{theorem}
+
+The converse of \nameref{thm:urysohnlemma} also holds, we simply take $O_0 = f^{-1}([0, 1/3))$ and $O_1 = f^{-1}((2/3, 1])$. We prove that metric spaces satisfy this property:
+
+\begin{proposition}
+    \label{prop:metricnormal}
+    Metric spaces are normal.
+\end{proposition}
+
+\begin{definition}[Distance from a set]
+    For a metric space $(X, d)$, we define $d_A(x)$ or $d(x, A)$ where $A \subseteq X$, as $\inf_{a \in A} d(x, a)$.
+\end{definition}
+
+It is easily seen that this function is Lipschitz with constant $\le 1$.
+
+Now, we can proceed with a proof of \autoref{prop:metricnormal}.
+
+\begin{proof}
+    Let $C_0, C_1$ be disjoint closed subsets in $(X, d)$, then define \[f\colon X \to [0, 1], x \mapsto \frac{d(x, C_0)}{d(x, C_0) + d(x, C_1)}.\] It is clear that $f(C_0) = 0$ and $f(C_1) = 1$, and that $f$ is continuous.
+\end{proof}
+
+Now, we continue with a proof of \nameref{thm:urysohnlemma}.
+
+\begin{lemma}
+    If $X$ is normal, then for any closed set $C$ and open set $O$ containing $C$, there is an open set $U$ ``between'' $C$ and $O$, that is, $C \subseteq U \subseteq \ol U \subseteq O$.
+\end{lemma}
+
+\begin{proof}
+    If $D = X \setminus O$, then $D$ is closed and disjoint from $C$ and then we can find disjoint open sets $U, V$ such that $U$ contains $C$ and $V$ contains $D$. In addition, the closure of $C$ must be contained within $X \setminus V$ which is contained by $U$. 
+\end{proof}
+
+\begin{proof}[Proof of \nameref{thm:urysohnlemma}]
+    Given $X$ normal and disjoint closed sets $C_0$, $C_1$, set $O_1 = C_1'$, then apply the preceding lemma to get a set $O_{1/2}$ ``between'' $C_0$ and $O_1$. Applying the lemma again, we then get a two open sets $O_{1/4}, O_{3/4}$ s.t. $C_0 \subseteq O_{1/4} \subseteq \ol{O_{1/4}} \subseteq O_{1/2} \subseteq \ol{O_{1/2}} \subseteq O_{3/4} \subseteq \ol{O_{3/4}} \subseteq O_1$. We can repeat this process to choose $O_{1/8}, O_{3/8}, O_{5/8}, O_{7/8}$, and then repeat the process over and over again.
+
+    Now, we are able to define $O_{d}$, for all $d \in \Delta$ (rational numbers of the form $k/2^n$ where $k \le 2^n$), such that if $r < s$, $\ol{O_r} \subseteq O_s$. In addition, for all $r$, $C_0 \subseteq O_r$. Define $f$ on $X$ by $f(x) = 1$ if $x \in C_1$, otherwise, we set $f(x) = \inf \qty{r \in \Delta \colon x \in O_r}$. We can see that $f(C_0) = 0$ in this case, since $r$ is dense in $[0, 1]$.
+
+    Now, to prove continuity, we choose a subbase of $[0, 1]$ consisting of sets of the form $(0, a]$ and $(b, 1]$. We then claim that \[f^{-1}([0, a)) = \bigcup_{r < a} O_r,\text{ and } f^{-1}((b, 1]) = \bigcup_{s > b} (\ol{O_s})'\]
+    This can be seen to be true due to density of $\Delta$, as you can always find a dyadic rational between $f(x)$ and either $a$ or $b$. 
+\end{proof}
+
+\section{Tietze Extension Theorem}
+
+If $X$ is a set and $(Y, d)$ is a metric space, then let $B(X, Y)$ be the set of bounded functions from $X$ to $Y$. Then, we can define a metric $\tilde d$ on $B(X, Y)$ as $\tilde d(f, g) = \sup_x \abs{f(x) - g(x)}$.
+
+\begin{proposition}
+    If $Y$ is complete, then $B(X, Y)$ is complete.
+\end{proposition}
+
+\begin{proof}
+    If $f_n$ is a Cauchy sequence then $f_n(x)$ is a Cauchy sequence for all $x$, and we can define $f(x) = \lim f_n(x)$.
+\end{proof}
+
+\begin{proposition}
+    If we assume that $X$ is instead of a topological space, then the set of continuous bounded functions $BC(X, Y)$ is complete if $Y$ is complete.
+\end{proposition}
+
+The following is an important result using \nameref{thm:urysohnlemma}.
+
+\begin{theorem}[Tietze Extension Theorem]
+    \label{thm:tietze}
+    If $X$ is a normal space and $A$ is a closed subset of $X$, and if $f \colon A \to \bb R$ is continuous, then there exists a continuous extension $g \colon X \to \bb R$ such that $g\vert_A = f$. Furthermore, if $f$ maps $A$ to $[a, b]$, then $g$ maps $X$ to that same interval.
+\end{theorem}
+
+Note that this theorem uses special properties of $\bb R$. For example, there is no continuous extension of the identity function from the unit circle to itself to the closed unit ball. To prove this theorem, we first prove a lemma.
+
+\begin{lemma}
+    If $X$ is normal and $A$ is a closed subset of $X$, if there is an $h$ mapping $A$ to $[0, r]$, then there is a $g\colon X \to [0, r/3]$ such that $0 \le h - g\vert_A \le 2r/3$.
+\end{lemma}
+
+\begin{proof}
+    If $B = \qty{x \in A \mid h(x) \le r/3}$, and $C = \qty{x \in A \mid h(x) \ge 2r/3}$. Then, we can find a function $g\colon X \to [0, r/3]$ such that $g\vert_B = 0$ and $g\vert_C = r/3$ by \nameref{thm:urysohnlemma}.
+\end{proof}
+
+\begin{proof}[Proof of \nameref{thm:tietze}]
+    We prove it for the special case $[0, 1]$, since all finite intervals are homeomorphic to the unit interval, this will hold for all finite initervals. To start, we can find a function $g^1 \colon [0, 1/3]$ such that $0 \le f - g\vert_A^1 \le 2/3$.
+
+    We then apply the lemma repeatedly: We apply it to $f - g\vert_A^1$ to get a function $g^2\colon X \to [0, 1/3(2/3)]$ such that $0 \le f - g\vert_A^1 - g\vert_A^2 \le 4/9$.
+
+    Repeat with $f - g\vert_A^1 - g\vert_A^2$ to get $g^3$, and in general we repeat this process with $f - g\vert_A^1 - \cdots - g\vert_A^n\colon A \to [0, \qty(\frac 23)^n]$ to get a function $g^{n + 1} \colon [0, \frac{1}{3}\qty(\frac{2}{3})^n]$ such that $f - g\vert_A^1 - \cdots - g\vert_A^{n + 1}\colon A \to [0, (2/3)^{n + 1}]$.
+
+    Now we have $\norm{g^n}_\infty \le \frac{1}{3}\qty(\frac{2}{3})^{n - 1}$, so $\sum_{k = 1}^{n} g^k$ is a Cauchy sequence and thus converges to $g = \sum g^n$, and we get that $\norm{g}_\infty \le 1$ by summing up the geometric series. We see that $g = f$ because \[\norm{f - g\vert_A} = \lim \norm{f - \sum_{k = 1}^n g\vert_A^k}.\]
+\end{proof}
+
+For infinite intervals, we use the homeomorphism $h$ from $\bb R$ to $(0, 1)$, and we set $g = h \circ f \colon A \to (0, 1)$. Now if we apply Tietze's extension theorem we get $\tilde g \colon X \to [0, 1]$, and let $D = \tilde g^{-1}(0)$, then $D$ is disjoint from $A$ and closed. We can take $U = \tilde g^{-1}([0, 1/4)) \cap A'$. By \nameref{thm:urysohnlemma} we can find a function that takes $k \colon X \to [0, 1]$ where $k(D) = 1/8$ and $k(U') = 0$, and we may add $\tilde g + k$ to obtain a continuous function whose output is not $0$. Repeat this process for the point $1$ and we get a final function that maps into $(0, 1)$.
+
+\section{Completion of Metric Spaces}
+
+
+Recall that if $X$ is a topological space then $\mathrm{BC}(X, \bb R)$ with the supremum norm is complete. This is an example of the following.
+
+\begin{definition}[Banach space]
+    A complete normed vector space is called a Banach space.
+\end{definition}
+
+We can use this fact to define a completion of a metric space $Y$.
+
+\begin{lemma}
+    If $(Y, d_Y)$ and $(M, d_M)$ are metric spaces and $M$ is complete, then if $f \colon Y \to M$ is an isometry, it can be seen that $\ol{f(Y)}$ is a completion of $M$.
+\end{lemma}
+
+\begin{theorem}
+    All metric spaces have a completion.
+\end{theorem}
+
+\begin{proof}
+    Given $(Y, d)$, we let $f_y(y') = d(y, y')$. This is unbounded, but if we choose $y_0 \in Y$ be any base point, we can define $h_y = f_y - g$, where $g = f_{y_0}$. By the triangle inequality, $h_y$ is bounded.
+
+    We now show that $y \mapsto h_y$ is an isometry, as $(h_{y_1} - h_{y_2})(y) = (f_{y_1} - f_{y_2})(y)$ so the norm is at most $d(y_1, y_2)$. In addition, if we plug in $y_1$, we get $R(f_{y_1} - f_{y_2})(y_1) = d(y_1, y_2)$, so $\norm{h_{y_1} - h_{y_2}} = d(y_1, y_2)$. According to the above lemma, we have a completion of $Y$.
+\end{proof}
+
