@@ -147,7 +147,12 @@ It is trivial that compactness implies totally bounded. We now prove a partial c
 \end{theorem}
 
 \begin{proof}
+    If $X$ is totally bounded, then if $\qty{x_n}$ is a sequence in $X$, we have for any $\veps > 0$ that $X = \bigcup B_\veps(x_i)$. Due to finiteness, for at least one $x_i$, we have infinitely many points in the sequence in $B_\veps(x_i)$. Taking $\veps = 1$, we have $A_1 = B_1(y_1)$ which has infinitely many points of $x_n$ inside, which means we can choose $A_{1/2} = B_{1/2}(y_2) \cap A_1$ with infinitely many points of $x_n$ inside, and we can repeat this process to obtain a sequence $A_1 \supseteq A_{1/2} \supseteq A_{1/4} \supseteq \cdots$ with successively decreasing diameters. By completeness, there exists an (unique) point in the intersection, and thus we have found an accumulation point.
 \end{proof}
+
+\begin{corollary}[Heine-Borel Theorem]
+    A subset of Euclidean space is compact iff it is closed and bounded.
+\end{corollary}
 
 We can now study compact sets in $\mathrm{BC}(X, M)$ with the $d_\infty$ metric, where $X$ is a topological space and $M$ is a complete metric space. These correspond precisely to the totally bounded sets.
 
@@ -162,5 +167,53 @@ We can now study compact sets in $\mathrm{BC}(X, M)$ with the $d_\infty$ metric,
 \end{theorem}
 
 \begin{proof}
-    If $\veps > 0$ is given, for each $x$ there is an open set $O_x$ such that $y \in O_x$, then $d(f(y), f(x)) < \veps/4$. By compactness, there are $x_1, \dots, x_n$ such that \[X = \bigcup_{i = 1}^n O_{x_i}.\] Now, for each $j$, the set $I_j = \qty{f(x_j) \mid f \in \mc F}$ is totally bounded, so if we choose $S_j$ to be a finite subset of $I_j$ that is $\veps/4$-dense in $I_j$. We can then take $S = \bigcup S_j$. Now, if we let $\Psi= \qty{\psi \colon \qty{1, \dots, n} \to S}$, which is finite, then 
+    If $\veps > 0$ is given, for each $x$ there is an open set $O_x$ such that $y \in O_x$, then $d(f(y), f(x)) < \veps/4$. By compactness, there are $x_1, \dots, x_n$ such that \[X = \bigcup_{i = 1}^n O_{x_i}.\] Now, for each $j$, the set $I_j = \qty{f(x_j) \mid f \in \mc F}$ is totally bounded, so if we choose $S_j$ to be a finite subset of $I_j$ that is $\veps/4$-dense in $I_j$. We can then take $S = \bigcup S_j$. Now, if we let $\Psi= \qty{\psi \colon \qty{1, \dots, n} \to S}$, which is finite, then we can define $\mc F_\psi = \qty{f \in \mc F \mid \forall j.\ d\qty(f\qty(x_j), \psi(j)) < \veps/4}$. We thus have $\mc F = \bigcup \mc F_{\psi}$.
+
+    Now, we prove that $\operatorname{diam}\qty(\mc F_\psi) < \veps$. For all $y$, we have that $y \in O_{x_i}$ for some $i$. Thus, if $f, g \in \mc F_\psi$, then \[d(f(y), g(y)) \le d(f(y), f(x_i)) + d(g(y), g(x_i)) + d(f(x_i), \psi(x_i)) + d(g(x_i), \psi(x_i)) < 4(\veps/4) = \veps.\] Then, $\mc F_\psi$ is contained within $B_\veps(f_\psi)$ for any $f_\psi \in \mc F_\psi$, and so $X = \bigcup B_\veps(f_\psi)$.
 \end{proof}
+
+\section{Locally Compact Spaces}
+
+\begin{definition}
+    A topological space $X$ is \textbf{locally compact} if for all $x \in X$, there exists a open set $x \in O$ such that $\ol O$ is compact.
+\end{definition}
+
+For now, we assume that $X$ is Hausdorff for simplicity.
+
+\begin{proposition}
+    If $X$ is locally compact, then for any point and open set $x \in O$, there exists an open set $x \in U \subseteq \ol U \subseteq O$.
+\end{proposition}
+
+\begin{proof}
+    Let $O' = O \cap O_1$, where $\ol{O_1}$ is compact. Now, due to regularity of $\ol{O'}$ which is also compact, and disjoint open sets $U$ and $V$ such that $x \in U$ and $\partial O \subseteq V$. Then $\ol U$ does not contain any points in $\partial O$ and thus $\ol U \subseteq O' \subseteq O$. Furthermore, $\ol U$ is compact due to being a closed subset of $\ol{O'}$.
+\end{proof}
+
+A stronger proposition is the following:
+
+\begin{proposition}
+    If $X$ is locally compact, then for any compact subset of an open set $C \subseteq O$, there exists an open set $C \subseteq U \subseteq \ol U \subseteq O$.
+\end{proposition}
+
+\begin{proof}
+    This just follows by taking points in $C$ and applying the previous proposition, then using compactness.
+\end{proof}
+
+\begin{definition}
+    For $f \in \mathrm C(X, V)$ where $V$ is a vector space and $X$ is locally compact, the \textbf{support} of $f$, $\supp(f)$ is defined as the closure of the set $\qty{x \colon f(x) \ne 0}$.
+\end{definition}
+
+\begin{definition}
+    We say that $f$ has \textbf{compact support} if $\supp(f)$ is compact. We denote the set of continuous compactly-supported functions by $\mathrm C_{\mathrm c}(X, V)$. 
+\end{definition}
+
+\begin{proposition}
+    For $X$ locally compact and $C$ compact, $O$ open, then there is a function $f \in \mathrm C_{\mathrm c}(X, \bb R)$ where $f(C) = 1$ and $f(O') = 0$.
+\end{proposition}
+
+\begin{proof}
+    Find $U$ such that $C \subseteq U \subseteq \ol U \subseteq O$ and apply Urysohn's Lemma.
+\end{proof}
+
+\begin{definition}
+    $\mathrm{C}_\mathrm{b}(X, \bb R)$ denotes the set of all bounded functions $X \to \bb R$. Using the $L^\infty$ norm, we have that the closure of $\mathrm C_{\mathrm c}(X, \bb R)$ is $\mathrm C_\infty(X, \bb R)$, which are the set of functions that vanish at infinity.
+\end{definition}
