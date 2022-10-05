@@ -1,0 +1,19 @@
+\chapter{Measures}
+
+In order to complete $C([0, 1])$, we need to define the integral on characteristic functions $\chi_E$ for many sets $E \subseteq [0, 1]$.
+
+To do this, we want to be able measure the sizes of sets ``consistently." To define ``consistent'', we specify a few properties. For example, if $\mu$ ``measures'' sets, then if $E$ and $F$ are two disjoint sets, then intuitively, $\mu(E \sqcup F)$ should be $\mu(E) + \mu(F)$.
+
+\begin{definition}
+    If $X$ is a set, a \textbf{ring} of subsets is a collection $R \subseteq 2^X$ such that \begin{enumerate}
+        \item If $E, F \in R$, then $E \cup F \in R$.
+        \item If $E, F \in R$, then $E \setminus X \in R$.
+    \end{enumerate}
+    This additionally implies that $\varnothing$ and $E \cap F = E \cup F \setminus (E \triangle F)$ is in $R$.
+
+    A \textbf{finitely additive measure} on $R$ is a function $\mu \colon X \to [0, \infty]$ where $\mu(E \sqcup F) = \mu(E) + \mu(F)$.
+\end{definition}
+
+It is obvious that for a finitely-additive measure we have that $\mu(\varnothing) = 0$.
+
+However, rings and finitely-additive measures aren't good enough, because of the key word \emph{finite}. If $E_n$ is a sequence of disjoint intervals $[a, b)$, we define $\mu(E_n) = [a, b)$. We consider that \[\sum_{n = 1}^\infty \mu(E_n) < \infty \] and define \[F_n = \bigsqcup_{k = 1}^n E_k,\] we see that $\chi_{F_n}$ is a Cauchy sequence, which ``wants to'' converge to $\chi_E$, where $E = \bigcup E_k$. Thus it makes sense to define \[\mu(E) = \sum_{n = 1}^\infty \mu(E_n),\] and by doing so, we introduce countable additivity.
