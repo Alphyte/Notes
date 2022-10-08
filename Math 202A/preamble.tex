@@ -8,6 +8,11 @@
 \usepackage{pgfplots}
 \usepackage{unicode-math}
 \usepackage{xcharter-otf}
+\usepackage[cal=esstix,calscaled=1.02]{mathalpha}
+\DeclareFontFamily{U}{stixtwoplain}{\skewchar\font =127}
+  \DeclareFontShape{U}{stixtwoplain}{m}{n} {
+	<-> \mathalfa@calscaled stix2-mathcal}{}
+% \SetMathAlphabet{\mathcal}{bold}{U}{stixtwoplain}{b}{n}
 
 
 \geometry{margin=3in}
