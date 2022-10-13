@@ -1,0 +1,40 @@
+\chapter{State-space systems}
+\section{Basic Definitions}
+
+We first start with the definition of a state-space system:
+
+\begin{definition}
+    A \textbf{continuous state-space linear system} is a system by 
+    \begin{align*}
+        \dot x(t) &= A(t)x(t) + B(t)u(t) \\ 
+        y(t) &= C(t)x(t) + D(t)u(t)
+    \end{align*}
+    $x$ is called the \textbf{state}, $y$ is called the \textbf{output}, and $u$ is called the \textbf{input}.
+
+    If $u$ is one-dimensional, then we call the system \textbf{single input (SI)}, and if $y$ is one-dimensional, we call the system \textbf{single output (SO)}. If their dimensions are not one, then we call the system \textbf{multiple input (MI)} and/or \textbf{multiple output (MO)} respectively.
+
+    If $A, B$, and $C$ are all zero, then we call the system \textbf{memoryless}. If $A, B, C, D$ are constant, then we call this a \textbf{linear time invariant (LTI)}, we call the general case \textbf{linear time varying (LTV)}.
+\end{definition}
+
+We will sometimes drop the time argument on the state, output, and input just to make the equations more concise, and if the system is LTI, then we will drop the argument for the matrices as well.
+
+\begin{definition}
+    A \textbf{discrete state-space linear system} is a system by 
+    \begin{align*}
+        x(t + 1) &= A(t)x(t) + B(t)u(t) \\ 
+        y(t) &= C(t)x(t) + D(t)u(t)
+    \end{align*}
+    which we shorten to 
+    \begin{align*}
+        x^+ &= A(t)x + B(t)u \\ 
+        y &= C(t)x + D(t)u
+    \end{align*}
+    and in the LTI case we drop the time argument on the matrices.
+\end{definition}
+
+\subsection{Linearization}
+
+Most systems in nature are nonlinear, but nonlinear systems are hard to work with. Thus, since nonlinear systems look linear locally, we can linearize them around a point. 
+
+More precisely, if $x^\mrm{eq}, u^\mrm{eq}$ is an equilibrium solution, then for solutions $u = u^\mrm{eq} + \delta u$, then $x = x^\mrm{eq} + \delta x$.
+
