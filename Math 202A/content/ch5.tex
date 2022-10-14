@@ -108,7 +108,7 @@ Thus, we try to define measures on smaller objects and then extend them to the $
     The fact that the sum of the measures is greater than or equal to the measure of the union follows from taking $\veps \to 0$. The fact that the sum of the measures is at most the measure of the union follows from considering the partial sums.
 \end{proof}
 
-\section{Extension of Premeasures}
+\section{Caratheodory's Extension Theorem}
 
 The main reason why we were interested in prerings and premeasures is because we can extend premeasures on prerings to measures on $\sigma$-rings.
 
@@ -135,11 +135,28 @@ This leads to a few important corollaries:
 \end{corollary}
 
 \begin{corollary}
-    If $E = \bigcup F_k$, then $\mu(E) \le \sum \mu(F_k)$, i.e. $\mu$ is subadditive.
+    If $E = \bigcup F_k$, then $\mu(E) \le \sum \mu(F_k)$, i.e. $\mu$ is (countably) subadditive.
 \end{corollary}
 
 \begin{proof}
     Given a sequence $F_k$ then we can ``disjointize'' it by defining \[G_k = F_k \setminus \bigcup_{j = 1}^{k - 1}F_k.\] Now we apply the preceding results.
 \end{proof}
 
- 
+\begin{definition}
+    Let $\mc F$ be any family of subsets of $X$, then $\mc H(\mc F)$ is the \textbf{hereditary\footnote{Heriditary just means if $E$ is in the family, then all subsets of $E$ are also in the family.} $\sigma$-ring} of sets that are countably covered by $\mc F$.
+\end{definition}
+
+\begin{definition}
+    If $\mc F$ is a family and $\mu \colon \mc F \to [0, \infty]$, then define $\mu^* \colon \mc H(\mc F) \to [0, \infty]$ by 
+    \[\mu^*(A) = \inf \qty{\sum_{j = 1}^\infty \mu(E_j) \colon E_j \in \mc F, A \subseteq \bigcup_{j = 1}^\infty E_j}.\]
+
+    For $\mc F$ a prering and $\mu$ a premeasure, then $\mu^*$ is called the \textbf{outer measure}.
+\end{definition}
+
+\begin{proposition}
+    $\mu^*$ is countably subadditive and monotone.
+\end{proposition}
+
+\begin{proof}
+    Monotonicity is trivial, but for subadditivity, suppose $B_1, \dots, B_k$ are in $\mc H(\mc F)$, then for any $\veps$ we let $\veps_j = 2^{-j - 1}\veps$. Now, for each $B_j$ we have sets $E_k^j$ such that $B_j \subseteq \bigcup_k E^j_k$, and $\mu^*(B_j) + \veps_j \ge \sum_k \mu(B_k^j)$. Now, we have \[\mu^*\qty(\bigcup_j B_j) \le \sum_j \sum_k \mu(E^j_k) \le \sum_j \mu^*(B_j) + \veps_j \le \veps + \sum_j \mu^*(B_j).\] Since $\veps$ can be made arbitrarily small, we prove the desired inequality.
+\end{proof}
