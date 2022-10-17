@@ -150,13 +150,77 @@ This leads to a few important corollaries:
     If $\mc F$ is a family and $\mu \colon \mc F \to [0, \infty]$, then define $\mu^* \colon \mc H(\mc F) \to [0, \infty]$ by 
     \[\mu^*(A) = \inf \qty{\sum_{j = 1}^\infty \mu(E_j) \colon E_j \in \mc F, A \subseteq \bigcup_{j = 1}^\infty E_j}.\]
 
-    For $\mc F$ a prering and $\mu$ a premeasure, then $\mu^*$ is called the \textbf{outer measure}.
+    For $\mc F$ a prering and $\mu$ a premeasure, then $\mu^*$ is called the \textbf{outer measure} induced by $\mu$.
 \end{definition}
 
 \begin{proposition}
-    $\mu^*$ is countably subadditive and monotone.
+    $\mu^*$ is countably subadditive and monotone, i.e., $\mu^*$ is an \textbf{outer measure}.
 \end{proposition}
 
 \begin{proof}
     Monotonicity is trivial, but for subadditivity, suppose $B_1, \dots, B_k$ are in $\mc H(\mc F)$, then for any $\veps$ we let $\veps_j = 2^{-j - 1}\veps$. Now, for each $B_j$ we have sets $E_k^j$ such that $B_j \subseteq \bigcup_k E^j_k$, and $\mu^*(B_j) + \veps_j \ge \sum_k \mu(B_k^j)$. Now, we have \[\mu^*\qty(\bigcup_j B_j) \le \sum_j \sum_k \mu(E^j_k) \le \sum_j \mu^*(B_j) + \veps_j \le \veps + \sum_j \mu^*(B_j).\] Since $\veps$ can be made arbitrarily small, we prove the desired inequality.
 \end{proof}
+
+However, while $\mu^*$ is subadditive, it turns out that it isn't necessarily countably additive. If we want to make it countably additive, we have to restrict the domain, which leads to the following clever definition:
+
+\begin{definition}
+    If $\mc H$ is a hereditary $\sigma$-ring on $X$ and $\nu$ is an outer measure on $\mc H$, then we say a set $E \in \mc H$ is \textbf{$\nu$-measurable} iff it ``splits'' every $A \in \mc H$, that is, $\nu(A) = \nu(A \setminus E) + \nu(A \cap E)$.
+
+    We denote the $\nu$-measurable subsets by $M(\nu)$.
+\end{definition}
+
+\begin{proposition}[Caratheodory]
+    $M(\nu)$ is a $\sigma$-ring and $\nu\vert_{M(\nu)}$ is a measure.
+\end{proposition}
+
+We first prove a lemma:
+
+\begin{lemma}
+    $M(\nu)$ is a ring and for any $A \in \mc H$, $E, F \in \mc H$ disjoint, we have $\nu(A \cap (E \cup F)) = \nu(A \cap E) + \nu(A \cap F)$.
+\end{lemma}
+
+\begin{proof}
+    We first prove that $M(\nu)$ is closed under finite unions. If $E, F$ are measurable, from subadditivity we have $\nu(A \cap (E \cup F)) + \nu(A \setminus (E \cup F)) \ge \nu(A)$. However, we also have that \begin{align*}
+        \nu(A \cap (E \cup F)) + \nu(A \setminus (E \cup F)) &= \nu((A \cap E) \cup (A \setminus E) \cap F) + \nu((A \setminus E) \setminus F) \\
+        &\le \nu(A \cap E) + \nu((A \setminus E) \cap F) + \nu((A \setminus E) \setminus F)\\
+        &= \nu(A \cap E) + \nu(A \setminus E) \tag{because $F$ splits $A \setminus E$}\\
+        &= \nu(A)
+    \end{align*}
+    thus $\nu(A \cap (E \cup F)) + \nu(A \setminus (E \cup F)) = \nu(A)$.
+
+    Now, we prove that $M(\nu)$ is closed under set difference. If $E, F$ are measurable, one direction of the inequality follows from subadditivity. Now, we have that 
+    \begin{align*}
+        \nu(A \cap (E \setminus F)) + \nu(A \setminus (E \setminus F)) &= \nu((A \cap E) \setminus F) + \nu((A \setminus E) \cup (A \cap (E \cap F)))\\
+        &\le \nu((A \cap E) \setminus F) + \nu(A \setminus E) + \nu((A \cap E) \cap F)\\
+        &= \nu(A \cap E) + \nu(A \setminus E)\\
+        &= \nu(A).
+    \end{align*}
+
+    Now, we prove the last property. Since $E$ splits $A \cap (E \cup F)$, then we have $\nu(A \cap (E \cup F) \cap E) + \nu((A \cap (E \cup F)) \setminus E) = \nu(A \cap E) + \nu(A \cap F) = \nu(A \cap (E \cup F))$.
+\end{proof}
+
+We have a couple of corollaries:
+
+\begin{corollary}
+    $\nu\vert_{M(\nu)}$ is finitely additive.
+\end{corollary}
+
+\begin{corollary}
+    If $E_k$ are a disjoint finite sequence of measurable sets, then $\nu1.(A \cap \bigsqcup E_k) = \sum \nu(\cap E_k)$
+\end{corollary}
+
+Now we prove that $M(\nu)$ is a $\sigma$-ring and that $\nu$ is countably additive on $M(\nu)$.
+
+\begin{proof}
+    If $E_j$ is a sequence of measurable sets, then we can disjointize the $E_j$ by setting \[F_k = E_k \setminus \bigcup_{j = 1}^{k - 1} E_j.\] Now, each $F_k$ is measurable due to $M(\nu)$ being a ring, and now we prove that $G = \bigsqcup F_j$ is measurable. Now, for all $n$, \begin{align*}
+        \nu(A) &= \nu\qty(A \cap \bigsqcup_{j = 1}^n F_k) + \nu\qty(A \setminus \bigsqcup_{j = 1}^n F_k)\\ 
+        &\ge \nu(A \setminus G) + \sum_{j = 1}^n \nu(A \cap E_j).
+    \end{align*}
+    and thus as a corollary, \[\nu(A) \ge \nu(A \setminus G) + \sum_{j = 1}^\infty \nu(A \cap E_j) \ge \nu(A \setminus G) + \nu(A \cap G).\]
+
+    Now, to prove countable additivity, just take $A = G$ in the previous proof.
+\end{proof}
+
+\begin{definition}
+    If $\mc F$ is a heriditary family of subsets of $X$, and $\nu \colon \mc F \to [0, \infty]$, we say $\nu$ is \textbf{complete} if when $\nu(E) = 0$, for all $F \subseteq E$, we have $F \in \mc F$, and $\nu(F) = 0$.
+\end{definition}

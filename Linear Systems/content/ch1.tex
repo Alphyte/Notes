@@ -47,4 +47,8 @@ then $\dot {\delta x} = f(x^\mrm{eq} + \delta x(t), u^\mrm{eq} + \delta u(t))$ i
 
 A similar result holds for the discrete case.
 
-Instead of linearizing around an equilibrium, we can instead linearize along a known trajectory. If $x^\mrm{sol}, u^\mrm{sol}$ are solutions to a nonlinear system $\dot x = f(x, u), y = g(x, u)$ then 
+Instead of linearizing around an equilibrium, we can instead linearize along a known trajectory. If $x^\mrm{sol}, u^\mrm{sol}$ are solutions to a nonlinear system $\dot x = f(x, u), y = g(x, u)$ then we consider solutions that satisfy coniditions $u = u^\mrm{sol} + \delta u$ and $x(0) = x^\mrm{sol}(0) + \delta x(0)$. Assuming that $\delta x$ and $\delta u$ are small, we can reasonably approximate the system as \begin{align*}
+    A(t) &= \eval{\pdv{f}{x}}_{\qty(x^\mrm{sol}(t), u^\mrm{sol}(t))} &B(t) &= \eval{\pdv{f}{u}}_{\qty(x^\mrm{sol}(t), u^\mrm{sol}(t))}\\
+    C(t) &= \eval{\pdv{g}{x}}_{\qty(x^\mrm{sol}(t), u^\mrm{sol}(t))} &D(t) &= \eval{\pdv{g}{u}}_{\qty(x^\mrm{sol}(t), u^\mrm{sol}(t))} 
+\end{align*}
+where $\dot{\delta x} \approx A(t)(\delta x) + B(t)(\delta u)$ and $\delta y \approx C(t)(\delta x) + D(t)(\delta u)$.
