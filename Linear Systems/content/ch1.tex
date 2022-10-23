@@ -32,7 +32,11 @@ We will sometimes drop the time argument on the state, output, and input just to
     and in the LTI case we drop the time argument on the matrices.
 \end{definition}
 
-\subsection{Linearization}
+\subsection{Interconnections}
+
+We can often combine state-space systems into more complicated one. Parallel interconnections essentially run two systems independently of each other, but use the same input. Cascade interconnections use the output of one system as the input for the second system. Feedback interconnections adds a linear function of the output back to the input of a system.
+
+\section{Linearization}
 
 Most systems in nature are nonlinear, but nonlinear systems are hard to work with. Thus, since nonlinear systems look linear locally, we can linearize them around a point. 
 
@@ -52,3 +56,61 @@ Instead of linearizing around an equilibrium, we can instead linearize along a k
     C(t) &= \eval{\pdv{g}{x}}_{\qty(x^\mrm{sol}(t), u^\mrm{sol}(t))} &D(t) &= \eval{\pdv{g}{u}}_{\qty(x^\mrm{sol}(t), u^\mrm{sol}(t))} 
 \end{align*}
 where $\dot{\delta x} \approx A(t)(\delta x) + B(t)(\delta u)$ and $\delta y \approx C(t)(\delta x) + D(t)(\delta u)$.
+
+
+\subsection{Feedback Linearization}
+
+Feedback linearization is essentially using the input to make a system linear.
+
+We can consider physical mechanical systems where the state is $(q, \dot q)$ and whose $F = M(q)\ddot{q} + B(q, \dot q)\dot{q} + G(q)$. These give rise to a lot of systems such as the inverted pendulum or simple robots. We call a system fully actuated when one can theoretically choose any value for $F$ using the input. In this case, we regard $F$ as the input to the system. 
+
+This system is nonlinear, but we can use the input to linearize it: by setting $F = u = M(q)v + B(q, \dot q)\dot q + G(q)$, we now the system \[\dot x = \mqty(0 & I \\ 0 & 0)x + \mqty(0 \\ I)v.\] 
+
+If we let $v$ be a PD controller, then $v = -K_pq - K_d\dot q$, we have \[\dot x = \mqty(0 & I \\ -K_pI & -K_dI)x.\]
+
+This can be generalized to a larger class of systems:
+
+\begin{definition}
+    A system is in \textbf{strict feedback form} if it is described by the following equations:
+    \begin{align*}
+        \dot x_1 &= f_1(x_1) + x_2\\
+        \dot x_2 &= f_2(x_1, x_2) + u.
+    \end{align*} where $x_1, x_2$ are vectors of equal length.
+\end{definition}
+
+To input-linearize a strict feedback form system, we first set $z_2 = x_2 + f_1(x_1)$, and we can rewrite the system as $\dot x_1 = z_2$, $\dot z_2 = v$, where $v = u + f_2(x_1, x_2)$.
+
+\section{Properties of Linear Systems}
+
+\begin{proposition}
+    LTV systems are \textbf{casual} and \textbf{linear}, and LTI systems are additionally \textbf{time-invariant}. 
+\end{proposition}
+
+We will now rigorously define these terms, but first, we use the notation $u \rightsquigarrow y$ to state that the input signal $u$ corresponds to an output signal $y$ for some choice of initial conditions.
+
+\begin{definition}
+    We say a system is \textbf{casual} if $u_1 \rightsquigarrow y_1$ and $u_1(t) = u_2(t)$ for $0 \le t \le T$ implies that $u_2 \rightsquigarrow y_2$ such that $y_1(t) = y_2(t)$ for $0 \le t \le T$.
+
+    A system is \textbf{time-invariant} if $u \rightsquigarrow y$ implies that $u \circ s_T \rightsquigarrow y \circ s_T$ for all $T > 0$, where $s_T \colon t \mapsto t + T$ is the time-shift operator.
+
+    A system is \textbf{linear} if $u_1 \rightsquigarrow y_1$ and $u_2 \rightsquigarrow y_2$ implies that $\alpha u_1 + \beta u_2 \rightsquigarrow \alpha y_1 + \beta y_2$.
+\end{definition}
+
+The verification of these properties of LTI and LTV systems are routine.
+
+\subsection{Classification of Outputs Corresponding to a Given Input}
+
+Linearity implies that the set of signals corresponding to the $0$ input form a linear subspace $H$ of the space of continuous signals $[0, \infty) \to \bb R$. It further implies that the set of signals corresponding to an input $u$ is an affine subspace $y + H$, where $y$ is any signal such that $u \rightsquigarrow y$.
+
+Now, we just need to find $H$ and some $y$ to classify all outputs corresponding to the input $u$. Finding $H$ is the same as solving the differential equation $\dot x = Ax$, which has solution $x(t) = e^{At}x(0)$ in the continuous case, and $x(t) = A^t x(0)$ in the discrete case.
+
+Now, to find $y$, we use techniques from signal processing: We define the unit pulse signal \[\delta_\Delta(t) = \begin{cases}
+    \Delta^{-1} \quad & 0 \le t < \Delta \\
+    0 & \text{else}
+\end{cases}.\]
+
+Using these signals, we can approximate \[u(t) \approx u_\Delta(t) = \sum_{n = 0}^\infty \Delta u(n\Delta)\delta_\Delta(t - n\Delta) = u\qty(\Delta \lfloor t/\Delta \rfloor).\]
+
+It is relatively easy to find solutions when the input signal is $\delta_\Delta(t - \tau)$, which we call $g_\Delta(t, \tau)$ such that $\delta_\Delta(t - \tau) \rightsquigarrow g_\Delta(t, \tau)$.
+
+Thus, since $u_\Delta$ is a linear combination of $\delta_\Delta(t - \tau)$, we can say that \[u_\Delta \rightsquigarrow \sum_{n = 0}^\infty \Delta u(n\Delta)g_\Delta(t, n\Delta)\]
