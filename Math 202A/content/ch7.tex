@@ -1,0 +1,117 @@
+\chapter{Integration of Functions}
+
+Now that we are able to measure the sizes of sets, we aim to define the integral of functions $f \colon (X, \mc S, \mu) \to \mc B$, where $\mc B$ is a Banach space. The most important example will be when $\mc B = \bb R$. In this section, $X$ will denote a measure space with $\sigma$-ring $\mc S$ and measure $\mu$, and $\mc B$ will denote a Banach space over $\bb K$.
+
+\section{Integrating Simple Functions}
+
+From intuition, we want the integral of the indicator function of a set $A$ to be the size (i.e. measure) of that set. However, when the sets are not measurable, this won't work, so we restrict ourselves to indicator functions of measurable sets.
+
+Also, we want the integral to be linear. Through these two properties, we can define the integral of linear combinations of indicator functions of measurable sets.
+
+\begin{definition}
+    We say $f \colon X \to \mc B$ is a \textbf{simple measurable function} if the image of $f$ is finite and if $f^{-1}\qty(\qty{y})$ is measurable for any $y \in \mc B$.
+\end{definition}
+
+\begin{lemma}
+    Any simple measurable function can be written as \[f = \sum_{y \in \im f} y\chi_{f^{-1}(\{y\})}.\]
+\end{lemma}
+
+\begin{lemma}
+    A function $f\colon X \to \mc B$ is simple measurable iff it can be written as \[f = \sum_{i= 1}^n y_i\chi_{E_i}\] where $y_i \ne 0$ and are distinct, and the $E_i$ are disjoint and nonempty.
+
+    Furthermore, if $f$ can be written in such a form, then the $y_i$ must range over $\im(f) \setminus \qty{0}$, and the $E_i$ must be the sets $f^{-1}(\{y_i\})$.
+\end{lemma}
+
+\begin{proposition}
+    The simple measurable functions from $X \to \mc B$ form a $\bb K$-vector space. In fact, if $\mc B$ is a Banach algebra, they form a $\bb K$-algebra.
+\end{proposition}
+
+\begin{proof}
+    Clearly $kf$ is simple measurable since $\im(kf) = k\im(f)$, and $(kf)^{-1}(ky) = f^{-1}(y)$.
+
+    Thus, if $f$ and $g$ are simple measurable, then let \[f = \sum_{i = 1}^m a_i\chi_{A_i}\quad \text{and}\quad g = \sum_{i = 1}^n b_i\chi_{B_i}.\] as in the previous lemma.
+
+    For convinience, let $A_{m + 1} = X \setminus \bigcup A_i$, $B_{n + 1} = X \setminus \bigcup A_j$, and $a_{m + 1} = 0 = b_{m + 1}$. Then, let $C_{ij} = A_i \cap B_j$ and $c_{ij} = a_i + b_j$. We can write \[f + g = \sum_{i = 1}^{m + 1} \sum_{j = 1}^{n + 1} c_{ij}\chi_{C_{ij}}.\] 
+    
+    However, the $c_{ij}$ might be zero and the $C_{ij}$ might be empty, so we remove those terms from the summation. In addition, if there are two $c_{ij}$s that are equal, we combine those terms in the summation. After doing these steps, we have a summation in the form required by the previous lemma, and thus we are done.
+
+    The proof for multiplication when $\mc B$ is an Banach algebra is similar.
+\end{proof}
+
+\begin{corollary}
+    The simple measurable functions are the span of the indicator functions of measurable sets.
+\end{corollary}
+
+Finally, we define the integral for simple measurable functions using the rules we stated at the beginning of the chapter.
+
+\begin{definition}
+    For a simple measurable function $f \colon X \to \mc B$, we define the \textbf{integral} of $f$ to be \[\int f \dd{\mu} = \sum_{y \in \im(f) \setminus \qty{0}} \mu(f^{-1}(\{y\}))y.\]
+\end{definition}
+
+Clearly $\int \chi_E \dd{\mu} = \mu(E)$, and satisfies the two properties we proposed at the beginning of this section:
+
+\begin{proposition}
+    $\int \chi_E \dd{\mu} = \mu(E)$, and the integral is $\bb K$-linear.
+\end{proposition}
+
+\section{Measurable Functions}
+
+Integrating simple functions isn't terribly interesting though, so we want to extend integration to functions that are non-simple. We can do this by considering the class of functions that are well approximable by SMFs, which turns out to be incredibly rich.
+
+\begin{definition}
+    If $f \colon X \to \mc B$, (where $\mc B$ could be just a pointed metric space), we say $f$ is \textbf{$\mc S$-measurable} if there exists a sequence $\qty{f_n}$ of SMFs that converges pointwise to $f$.
+
+    If we have a measure $\mu$ on $\mc S$, the null sets form a $\sigma$-ring. In this situation, we say that $f$ is \textbf{$\mu$-measurable} if there exists a sequence $\qty{f_n}$ that converges to $f$ $\mu$-\emph{almost everywhere}, i.e., there exists a null set $N$ such that $f_n \to f$ on $X \setminus N$.
+\end{definition}
+
+To make the theory work smoothly, however, we need the following non-obvious fact:
+
+\begin{proposition}
+    If $f_n \to f$, where the functions $f_n$ are $\mc S$-measurable, then $f$ is measurable.
+\end{proposition}
+
+We will prove this later, but first we try and isolate properties of measurable functions to make this easier to prove.
+
+\begin{proposition}
+    If $\qty{f_n}$ are SMFs, and $f_n \to f$ pointwise, then \[\im(f) = \ol{\qty(\bigcup_{i = 1}^\infty \im(f_i))},\] and thus $\im(f)$ is separable, i.e. is contained in a closure of a countable set.
+\end{proposition}
+
+\begin{proposition}
+    The carrier of a measurable function $f$ is contained in the union of the carriers of $f_n$, which are SMFs converging to $f$, and thus there is a set $E \in \mc S$ where $\carrier(f) \subseteq E$.
+\end{proposition}
+
+Now we get the main property
+\begin{proposition}
+    If $f$ is measurable then if $U$ is open in $\mc B$, we have $f^{-1}(U) \cap E \in \mc S$.
+\end{proposition}
+
+\begin{proof}
+    $x \in f^{-1}(U)$ iff $f(x) \in U$. Now, we define $U_m$ to be the set $\qty{x \in U \mid d(x, U') > 1/m}$. Then, we have $\ol{U_m} \subseteq U_{m - 1}$. We can see that $f(x) \in U$ iff there exists $n$ such that $f(x) \in U_n$. Now, if $f_k \to f$ is any sequence of functions converging to $f$ pointwise, then using approximation and the triangle inequality, we see that $f(x) \in U$ if and only if there exists a $n$ and $K$ such for $k \ge K$ such that $f_k(x) \in U_n$.
+
+    Now we have \[x \in f^{-1}(U) \cap E\iff x \in \bigcup_{n = 1}^\infty \bigcup_{K = 1}^\infty \bigcap_{k = K}^\infty f_k^{-1}(U_n) \cap E,\] thus $f^{-1}(U) \cap E \in \mc S$ for $f_k$ simple.
+\end{proof}
+
+\begin{corollary}
+    If $f$ is measurable, for any Borel set $A \subseteq \mc B$, then $f^{-1}(A) \in \mc S$. \textbf{This is the traditional definition of measurable}.
+\end{corollary}
+
+\begin{corollary}
+    If $f_n$ is a sequence of measurable functions converging to $f$ then $f$ satisfies
+    \begin{enumerate}
+        \item $\im(f)$ is separable.
+        \item There is a set $E \in \mc S$ where $\carrier(f) \subseteq E$.
+        \item If $f_n$ is a sequence of measurable functions and $f_n \to f$, then $f^{-1}(A) \cap E\in \mc S$ for all Borel sets $A \subseteq \mc B$. 
+    \end{enumerate}
+\end{corollary}
+
+Now, to prove that limits of measurable functions are measurable, we just need to prove that functions that satisfy 1, 2, and 3 are measurable.
+
+\begin{theorem}
+    If $f \colon X \to \mc B$ has properties 1, 2, and 3, then it is measurable.
+\end{theorem}
+
+\begin{proof}
+    In this proof, we will work implicity with $X = E$ to avoid many intersections. Now, to construct a sequence of SMFs that converge to $f$, we enumerate a sequence $\qty{b_j}$ that is dense in $\im(f)$. Set $C_{ji} = B_{1/j}(b_i)$, whose preimage is in $\mc S$, and we order the pairs $(j, i)$ lexicographically. Now, for fixed $n$, we construct $f_n$ as follows: disjointize the $C_{ji}$ for $j, i \le n$ in reverse of the order given. Thus, $E_{nn} = C_{nn}$, and $E_{ij} = C_{ji} \setminus \bigcup \qty{ C_{\ell k} \mid ji < \ell k \le nn, i \le n}$. Now we let $f_n = \sum_{ji \le nn, i \le n} b_i \chi_{E_{ji}}$.
+
+    Now we prove that $f_n \to f$ pointwise. If we fix $x \in X$ and $\veps > 0$, there exists some point $b_N$ where $\norm{f(x) - b_N} < \veps$, and thus $x$ is contained within $C_{NK}$ for $K = \lceil 1/\veps \rceil$. Now, if we take $M = \max(N, K)$, then we can see for all $m \ge M$, $f_m(x)$ is either $b_N$, or some other $b$ such that $\norm{f(x) - b} < 1/M < \veps$.
+\end{proof}

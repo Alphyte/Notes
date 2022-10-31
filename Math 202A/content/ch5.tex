@@ -223,54 +223,8 @@ Now we prove that $M(\nu)$ is a $\sigma$-ring and that $\nu$ is countably additi
 
 We have now proved Caratheodory's Extension Theorem in full, as if $\nu$ is the outer measure induced by the premeasure $\mu$, it is easy to see that $\nu$ is an extension of $\mu$ to a $\sigma$-ring containing $\mc S(\mc P)$. 
 
-\section{Properties of Extensions}
-Now, we prove a few properties of this constructed measure.
-
-\begin{definition}
-    If $\mc F$ is a heriditary family of subsets of $X$, and $\nu \colon \mc F \to [0, \infty]$, we say $\nu$ is \textbf{complete} if when $\nu(E) = 0$, for all $F \subseteq E$, we have $F \in \mc F$, and $\nu(F) = 0$.
-\end{definition}
-\begin{proposition}
-    $\nu$ is complete.
-\end{proposition}
-
-\begin{proof}
-    If $\nu(E) = 0$ and $B \subseteq E$, then for any set $A$, $\nu(A \cap B) = 0$, and $\nu(A \setminus B)$  must be equal to $\nu(A)$ due to monotonicity and subadditivity.
-\end{proof}
-
-Note that a similar proof also implies that any set with outer measure $0$ is measurable with measure $0$.
-
-We may assume extensions are unique, but this does not hold:
-
-\begin{proposition}
-    Extensions are not necessarily unique.
-\end{proposition}
-
-\begin{proof}
-    Consider $\bb R$ with the prering $\mc P$ consisting of all countable sets, and define $\mu(P) = 0$ for all $P \in \mc P$. Then when extending this to $S(\mc P)$, we can define the measure to be the zero measure or the measure that attains infinity on uncountable sets.
-\end{proof}
-
-Another example is given by:
+An important case of this extension theorem is the following:
 
 \begin{example}
-    Consider $\mc P$ to be the prering of half open intervals $[a, b)$ and define $\mu$ to be infinite on all of these.    
+    Applying this extension to the premeasures $\mu_\alpha$ as in Proposition 5.6, we get the \textbf{Lebesgue-Stiltjes measures}. When $\alpha$ is the identity, we get the \textbf{Lebesgue measure}.
 \end{example}
-
-We notice that these all happen due to the extensions attaining infinite values, which motivates the following definition:
-
-\begin{definition}
-    If $(X, \mc P, \mu)$ is a premeasure space, then we say it is \textbf{$\sigma$-finite} if for all $E \in \mc P$ there exists a sequence of $E_j$ in $\mc P$ such that $E = \bigcup E_j$ and $\mu(E_j) < \infty$.
-\end{definition}
-
-\begin{theorem}
-    If $(X, \mc P, \mu)$ is $\sigma$-finite then $\mu^*\vert_\mc{S}$ is the unique extension of $\mu$ to $\mc S$.
-\end{theorem}
-
-\begin{proof}
-    If $\nu$ is any extension of $\mu$ to $\mc S$, if $G \in \mc S$ and $G \subseteq E \in \mc P$ 
-\end{proof}
-
-However, 
-
-\begin{proposition}
-    If $(X, \mc P, \mu)$ is a premeasure, then for all $\sigma$-rings $\mc S \subseteq M(\mu^*)$ containing $\mc P$, then $\mu^*\vert_\mc{S}$ is the largest measure on $\mc S$ extending $\mu$.
-\end{proposition}
