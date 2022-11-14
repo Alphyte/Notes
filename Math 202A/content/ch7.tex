@@ -107,7 +107,11 @@ Now we get the main property
 Now, to prove that limits of measurable functions are measurable, we just need to prove that functions that satisfy 1, 2, and 3 are measurable.
 
 \begin{theorem}
-    If $f \colon X \to \mc B$ has properties 1, 2, and 3, then it is measurable.
+    If $f \colon X \to \mc B$ has properties 1, 2, and 3, then it is measurable. That is, a function $f$ is a $\mc S$-measurable function if and only if \begin{enumerate}
+        \item $\im(f)$ is separable.
+        \item There is a set $E \in \mc S$ where $\carrier(f) \subseteq E$.
+        \item If $f_n$ is a sequence of measurable functions and $f_n \to f$, then $f^{-1}(A) \cap E\in \mc S$ for all Borel sets $A \subseteq \mc B$. 
+    \end{enumerate}
 \end{theorem}
 
 \begin{proof}
@@ -115,3 +119,166 @@ Now, to prove that limits of measurable functions are measurable, we just need t
 
     Now we prove that $f_n \to f$ pointwise. If we fix $x \in X$ and $\veps > 0$, there exists some point $b_N$ where $\norm{f(x) - b_N} < \veps$, and thus $x$ is contained within $C_{NK}$ for $K = \lceil 1/\veps \rceil$. Now, if we take $M = \max(N, K)$, then we can see for all $m \ge M$, $f_m(x)$ is either $b_N$, or some other $b$ such that $\norm{f(x) - b} < 1/M < \veps$.
 \end{proof}
+
+Here are some standard facts about measurable functions:
+
+\begin{proposition}
+    \begin{enumerate}
+        \item The set of $\mc S$-measurable functions form a vector space.
+        \item If $f$ is measurable, then $\norm{f}$ is a measurable function from $X \to \bb R$.
+        \item If $f$ is measurable and $g$ is a real-valued measurable function, then $gf$ is measurable. 
+    \end{enumerate}
+\end{proposition}
+
+\section{Modes of Convergence}
+
+Now that we have developed the theory of measurable functions, we go back to integration.
+
+We first define what it means for a simple function to be integrable:
+
+\begin{definition}
+    A SMF $f$ is \textbf{simple integrable} iff $\int \norm{f} \dd{\mu} < \infty$, which is equivalent to $\mu(E) < \infty$ for all $E = f^{-1}(\qty{y})$ for $y \in \im(f) \setminus \qty{0}$.
+\end{definition}
+
+Considering only SIFs, we see the following properties:
+
+\begin{proposition}
+    \begin{enumerate}
+        \item $f \mapsto \int f\dd{\mu}$ is linear.
+        \item If $f$ is a real-valued SIF where $f \ge 0$, then $\int f\dd{\mu} \ge 0$.
+        \item The function \[f \mapsto \int \norm{f} \dd{\mu}\] is a seminorm.
+        \item The functions $f$ such that $\int \norm{f} \dd{\mu} = 0$ are equal to $0$ a.e.
+    \end{enumerate}
+\end{proposition}
+
+We want to take the completion of this space and extend the integral operator.
+
+However, we have bad news: A sequence $\qty{f_n}$ of SIF that is Cauchy for $\norm{\cdot}_1$ need not converge pointwise at any point.
+
+\begin{example}
+    Let $X = [0, 1]$ and $\mu$ be the Lebesgue measure, then we let $f_1 = \chi_{[0, 1/2]}$, $f_2 = \chi_{[1/2, 1]}$, and continue the sequence as so: $\chi_{[0, 1/3]}, \chi_{[1/3, 2/3]}$, $\chi_{[2/3, 1]}$, $\chi_{[0, 1/4]}$, and so on.
+
+    This sequence is Cauchy in mean (Cauchy in the $L^1$ norm), but does not converge pointwise, as it is not Cauchy anywhere.
+\end{example}
+
+\begin{definition}
+    If $f_n$ is a sequence of measurable functions and $f$ is measurable, then $f_n$ \textbf{converges to $f$ in measure} if for all $\veps > 0$, we have $\mu\qty(\qty{x \mid \norm{f_n(x) - f(x)} \ge \veps}) \to 0$.
+\end{definition}
+
+\begin{definition}
+    If $f_n$ is a sequence of measurable functions then $f_n$ is \textbf{Cauchy in measure} if for all $\veps > 0$, we have $\sup_{n, m \ge N}\mu\qty(\qty{x \mid \norm{f_n(x) - f_m(x)} \ge \veps})$ converges to $0$ as $N \to \infty$.
+\end{definition}
+
+\begin{proposition}
+    If a sequence if SIFs $f_n$ is Cauchy in the $L^1$ (or $L^p$) norm, then it is Cauchy in measure.
+\end{proposition}
+
+\begin{proof}
+    For a given $\veps > 0$, and $m,n \in \bb N$, then we let $E_{mn}^\veps = \qty{x \in X \mid \norm{f_m(x) - f_n(x)} \ge \veps}$. We note that $\veps \chi_{E_{mn}^\veps} \le \norm{f_m(x) - f_n(x)}$. Now we have $\int \norm{f_m(x) - f_n(x)} \dd{\mu} = \norm{f_n - f_m} \ge \veps\mu(E_{mn}^\veps)$. Thus, we have that $\mu(E_{mn}^\veps) \to 0$ as $m, n \ge N$ and $N \to \infty$.
+\end{proof}
+
+\begin{corollary}[Chebyshev's inequality]
+    If $X$ is a random variable, then if $\mu := \bb E[X], \sigma^2 := \bb E[(X - \mu)^2]$, then $\bb P[\abs{X - \mu} \ge \veps] \le \sigma^2/\veps$.
+\end{corollary}
+
+We prove that convergence in measure is unique in a sense.
+
+\begin{proposition}
+    If $f_n \to f, g$ where all functions are measurable, then $f = g$ almost everywhere.
+\end{proposition}
+
+\begin{proof}
+    $\norm{f(x) - g(x)} \le \norm{f(x) - f_n(x)} + \norm{f_n(x) - g(x)}$ by the triangle inequality. Then, we also have \[\mu(\qty{x \mid \norm{f(x) - g(x)} \ge \veps}) \le \mu\qty(\qty{x \mid \norm{f(x) - f_n(x)} \ge \veps/2}) + \mu\qty(\qty{x \mid \norm{f(x) - f_n(x)} \ge \veps/2})\] where the RHS converges to $0$ due to definition of measure. Thus we have that the LHS converges to $0$ for all $\veps > 0$. If we let $E^\veps = \qty{x \mid \norm{f(x) - g(x)}} \ge \veps$, then we see that the set $E = \qty{x \mid f(x) \ne g(x)} = \bigcup_n E^{1/n}$. Due to countable additivity, $\mu(E) \le \sum E^{1/n} = 0$.
+\end{proof}
+
+We also have some pretty standard properties:
+
+\begin{proposition}
+    If $f_n \to f$ and $g_n \to g$ in measure, then $af_n + bg_n \to af + bg$ in measure. Furthermore, $x \mapsto \norm{f_n(x)}$ converges to $x \mapsto \norm{f(x)}$ in measure.
+\end{proposition}
+
+\begin{definition}
+    If $f_n$ is any sequence of $\mc B$-valued functions, we say that $f_n \to f$ \textbf{almost uniformly} if for every $\veps > 0$ there exists a set $E^\veps \in \mc S$ such that $\mu(E^\veps) < \veps$, and $f_n \to f$ uniformly on $X \setminus E^\veps$.
+
+    $f_n$ is \textbf{almost uniformly Cauchy} if for all $\veps > 0$ there exists a set $E^\veps \in \mc S$ such that $\mu(E^\veps) < \veps$, and $f_n$ is uniformly Cauchy on $X \setminus E^\veps$.
+\end{definition}
+
+
+\begin{theorem}[Riesz-Weyl]
+    If $f_n$ is a sequence of $\mc S$-measurable functions that is Cauchy in measure, then there is a subsequence of $f_n$ that is almost uniformly Cauchy.
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\section{The General Integral}
+
+\begin{proposition}
+    If $f_n$ is a sequence of measurable functions that converges to $f$ almost uniformly, then it converges to $f$ in measure.
+\end{proposition}
+
+\begin{theorem}
+    Let $f$ be a measurable function, then the following are equivalent:
+    \begin{enumerate}
+        \item There is a sequence of SIFs $f_n \to f$ in measure, such that $f_n$ is Cauchy in mean.
+        \item There is a sequence of SIFs $g_n \to f$ almost uniformly, such that $g_n$ is Cauchy in mean.
+        \item There is a sequence of SIFs $h_n \to f$ almost everywhere, such that $h_n$ is Cauchy in mean.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We prove this as a chain of implications:
+    \begin{enumerate}
+        \item[$(1) \Rightarrow (2)$] By the Riesz-Weyl theorem, we have that some subsequence $g_n$ of $f_n$ that is almost uniformly Cauchy, which implies that  it converges almost uniformly to some function $g$. Since by the previous proposition that implies it converges in measure to $g$, that must mean $g = f$ a.e. by Proposition 7.17, which implies that $g_n \to f$ almost uniformly.
+        \item[$(2) \Rightarrow (3)$] Consider $A^{1/n}$ such that $f_n \to f$ uniformly on $A^{1/n}$ with $\mu(X \setminus A^{1/n}) < 1/n$. Then, $f_n \to f$ on $\bigcup A^{1/n}$.
+        \item[$(3) \Rightarrow (1)$]    
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    We say $f_n$ is \textbf{integrable} if one of these conditions holds. The set of integrable functions from $(X, \mc S, \mu) \to \mc B$ is denoted by $\mc L^1(X, \mc S, \mu, \mc B)$.
+\end{definition}
+
+We can note that $\mc L^1(X, \mc S, \mu, \mc B)$ is a module over $\mc L^\infty(X, \mc S, \mu, \bb K)$, which is the set of essentially bounded functions.
+
+% \begin{proposition}
+%     If $f_n$ is Cauchy in mean and some subsequence of it converges to $f$ in mean, then $f_n \to f$ in mean.
+% \end{proposition}
+
+To properly complete the space of SIFs under the $L^1$ norm, we want some sort of uniqueness property of convergence.
+
+\begin{proposition}
+    If the sequences $f_n$ and  $g_n$ are Cauchy in mean and converge to $f$ and $g$ respectively, where $\norm{f_n -g_n}_1 \to 0$, then $f = g$ a.e.
+\end{proposition}
+
+When we define the integral of a integrable function $f$, we want to approximate it with SIFs. The following proposition states that it does not matter which sequence of SIFs we wish to use to approximate $f$ with.
+
+
+\begin{definition}
+    If $f$ is an integrable function, then we define the \textbf{integral} of $f$, \[\int f \dd{\mu} = \lim_{n \to \infty} \int f_n \dd{\mu},\] where $f_n$ is a mean-Cauchy sequence of SIFs converging in measure to $f$.
+\end{definition}
+
+The following proposition implies that this value does not depend on the choice of sequence, and thus the definition above is a valid one.
+
+\begin{proposition}
+    If $f_n$ and $g_n$ are mean Cauchy sequences of SIFs where both converge to $f$ in measure. Then, they are equivalent, i.e. $\norm{f_n \to g_n}_1 \to 0$.
+\end{proposition}
+
+\begin{proof}
+    We first prove that if $h_n \to 0$ in measure and is mean Cauchy, then it converges to $0$ in mean. By the Riesz-Weyl theorem, there exists a subsequence $j_n$ that is almost uniformly Cauchy. Let $E_n = \mathrm{carrier}(j_n)$, and $E = \bigcup E_n$. Then, for $N$ such that $\norm{j_n - j_m} < \veps/4$ when $n, m \ge N$, we have that \[\int_{E \setminus E_N} \norm{j_n} \dd{\mu} = \norm{j_n - j_N}_1 < \veps/4\] and we have that $j_n$ almost uniformly converges to $0$ on $E_N$, which has finite measure.
+
+    Now, we choose $G$ such that $j_n \to 0$ uniformly on $E_N \setminus G$, where $\mu(G) < \veps/(4 + 4\norm{g_N}_\infty)$, and thus \[\int_{E_N \setminus G} j_n \to 0.\] Now, on $G$, we have \[\int_G \norm{j_n} \dd{\mu} \le \int_G \norm{j_n - j_N} + \norm{j_N} \dd{\mu}\le \veps/4 + \mu(G)\norm{f_N}_\infty < \veps/2,\] and thus picking $N' \ge N$ big enough where $\norm{j_n} < \veps/(4\mu(E_N \setminus G))$ for all $n \ge N'$, and we have that $\norm{j_n}_1 < \veps$ for all $n \ge N'$.    
+
+    Then, it suffices to see that $f_n - g_n \to 0$ in measure.
+\end{proof}
+
+\section{The Space $L^1$}
+
+Our original goal was to define the completion of $\mathrm{SIF}(X, \mc S, \mu, \mc B)$. We say two functions $f, g \in \mc L^1(X, \mc B)$ are equivalent iff $f = g$ a.e. Taking equivalence classes under this equivalence relation, we get the following definition:
+
+\begin{definition}
+    $L^1(X, \mc S, \mu, \mc B)$ denotes the set of integrable functions quotiented out by a.e.-equivalence. 
+\end{definition}
+
+From the previous section, one can deduce that there is a bijection between the Cauchy completion of $\mathrm{SIF}(X, \mc B)$ and $L^1(X, \mc B)$, and thus we have achieved our original goal.
