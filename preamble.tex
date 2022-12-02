@@ -3,12 +3,14 @@
 \usepackage{amsthm, thmtools}
 \usepackage[margin=0.5in]{geometry}
 \usepackage{mathtools}
-\usepackage{physics}
+
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{siunitx}
 \usepackage{unicode-math}
 \usepackage{xcharter-otf}
 \usepackage[cal=esstix,calscaled=1.02]{mathalpha}
+\usepackage{physics}
 % \DeclareFontFamily{U}{stixtwoplain}{\skewchar\font =127}
 %   \DeclareFontShape{U}{stixtwoplain}{m}{n} {
 % 	<-> \mathalfa@calscaled stix2-mathcal}{}
@@ -55,3 +57,7 @@
 \DeclareMathOperator{\supp}{supp}
 % \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\carrier}{carrier}
+
+\KOMAoptions{twoside=false}
+
+\newcommand{\nt}[1]{\textbf{#1}\index{#1}}

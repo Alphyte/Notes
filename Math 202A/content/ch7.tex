@@ -209,7 +209,7 @@ We also have some pretty standard properties:
 \end{theorem}
 
 \begin{proof}
-    
+    Consider the sequence $n_k$ defined by $\mu(\qty{x \mid \abs{f_{n_k} - f} \ge 2^{-k}}) < 2^{-k}$.
 \end{proof}
 
 \section{The General Integral}
@@ -232,7 +232,7 @@ We also have some pretty standard properties:
     \begin{enumerate}
         \item[$(1) \Rightarrow (2)$] By the Riesz-Weyl theorem, we have that some subsequence $g_n$ of $f_n$ that is almost uniformly Cauchy, which implies that  it converges almost uniformly to some function $g$. Since by the previous proposition that implies it converges in measure to $g$, that must mean $g = f$ a.e. by Proposition 7.17, which implies that $g_n \to f$ almost uniformly.
         \item[$(2) \Rightarrow (3)$] Consider $A^{1/n}$ such that $f_n \to f$ uniformly on $A^{1/n}$ with $\mu(X \setminus A^{1/n}) < 1/n$. Then, $f_n \to f$ on $\bigcup A^{1/n}$.
-        \item[$(3) \Rightarrow (1)$]    
+        \item[$(3) \Rightarrow (1)$] Apply the Riesz-Weyl theorem to get a sequence $g_n$ of $h_n$ that is almost uniformly Cauchy, which implies that converges almost uniformly to $f$. Now, it is clear that for any $\delta, \veps$, we can choose $A$ where $\mu(X \setminus A) < \veps$, and $g_n \to f$ uniformly on $A$. In addition, we can choose $N$ large enough that $\norm{g_n(x) - f(x)} < \delta$ for all $x \in A$, which means that \[\mu\qty(\qty{x \mid \norm{g_n(x) - f(x)} \ge \delta}) < \veps\] for all $n \ge N$.
     \end{enumerate}
 \end{proof}
 
@@ -273,12 +273,3 @@ The following proposition implies that this value does not depend on the choice 
     Then, it suffices to see that $f_n - g_n \to 0$ in measure.
 \end{proof}
 
-\section{The Space $L^1$}
-
-Our original goal was to define the completion of $\mathrm{SIF}(X, \mc S, \mu, \mc B)$. We say two functions $f, g \in \mc L^1(X, \mc B)$ are equivalent iff $f = g$ a.e. Taking equivalence classes under this equivalence relation, we get the following definition:
-
-\begin{definition}
-    $L^1(X, \mc S, \mu, \mc B)$ denotes the set of integrable functions quotiented out by a.e.-equivalence. 
-\end{definition}
-
-From the previous section, one can deduce that there is a bijection between the Cauchy completion of $\mathrm{SIF}(X, \mc B)$ and $L^1(X, \mc B)$, and thus we have achieved our original goal.

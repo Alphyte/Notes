@@ -1,0 +1,21 @@
+\chapter{Calculus of Variations}
+
+\section{Basic Examples}
+
+\subsection*{Geodesic}
+
+In Euclidean space, the length of a curve $x(t), y(t)$ is defined as \[\int_0^{t_f} \sqrt{x'(t) + y'(t)} \dd{t}.\] To find the geodesic between two points, i.e. the shortest curve between two points $P$ and $Q$, we consider the constraints $(x(0), y(0)) = p$ and $(x(t_f), y(t_f)) = q$.
+
+In general, on a Riemannian manifold $(M, g)$, you can find the geodesic connecting two points $p$ and $q$ by minimizing $\int_0^{t_f} \norm{\gamma'(t)}_g^2 \dd{t}$ subject the constraints $\gamma(0) = p$, $\gamma(1) = q$.
+
+\subsection*{Catenary}
+
+Consider a bridge with a cable hanging from two posts. We want to find the shape of the cable, which is equivalent to minimizing the potential energy of the cable.
+
+If the height of cable at position $x$ is denoted by $h(x)$ and the cable's linear density is denoted by $\lambda$, then this is equivalent to minimizing \[\int_0^\ell \lambda g h(x)\sqrt{1 + h'(x)} \dd{x}\] with the constraints $h(0) = h(\ell) = h_0$.
+
+One can see that both examples involve constrained minimation of a \textit{functional}.
+
+\section{Basic Techniques}
+
+In both cases, we have a functional $\Phi \colon F \to \bb R$, of the form $\int L(q, \dot q, t)$.

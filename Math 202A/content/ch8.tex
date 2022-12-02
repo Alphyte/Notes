@@ -1,3 +1,119 @@
 \chapter{Properties of the Integral}
 
 \section{A Few Basic Facts}
+
+Clearly the integral is a linear function from $\mc L^1 \to \mc B$. If $\mc B = \bb R$, then the integral is additionally monotone. Thus, the function $\norm{f}_1 = \int \norm{f} \dd{\mu}$ is a seminorm on $\mc L^1$. If $f_n \to f$ (or is Cauchy) in this norm, we say $f_n \to f$ (or is Cauchy) in mean.
+
+We now collect some basic properties about the Lebesgue integral here:
+
+\begin{proposition}
+    The integral is linear.
+\end{proposition}
+
+\begin{proposition}
+    If $\mc B = \bb R$, then the integral is monotone.
+\end{proposition}
+
+\begin{proof}
+    Note that if $f_n \to f \ge 0$ converges to $f$ in measure, then so does $\abs{f_n}$.
+\end{proof}
+
+\begin{proposition}
+    \[\norm{\int f \dd{\mu}} \le \int \norm{f} \dd{\mu} \]
+\end{proposition}
+
+\begin{proof}
+    Clearly true for SIFs due to triangle inequality, extend by taking limit.
+\end{proof}
+
+\section{Building Towards Completeness}
+\begin{proposition}
+    If $f \colon X \to \mc B$ is integrable, then $f_n$ is a sequence of mean Cauchy SIFs such that $f_n \to f$ in measure, then $f_n \to f$ in mean.
+\end{proposition}
+
+\begin{proof}
+    Let $N$ be such that if $n, m \ge N$ then $\norm{f_n - f_m}_1 < \veps/2$, then for all fixed $M \ge N$, we define $g_n^M = f_M - f_n$. Clearly, $g_n^M$ is mean Cauchy and converges in measure to $f_M - f$. 
+
+    Due to the reverse triangle inequality, the sequence $\norm{g_n^M}$ is also mean Cauchy and converges to $\norm{f_M - f}$ in measure, so \[\norm{f_M - f}_1 = \int \norm{f_M - f} \dd{\mu} = \lim_{n \to \infty} \int \norm{g_n}\dd{\mu} = \lim \norm{f_M - f_n}_1.\] Due to mean Cauchy-ness, the limit on the right hand side is at most $\veps/2$ since for all $n \ge N$, $\norm{f_M - f_n} < \veps/2$, and thus for all $M \ge N$, we have $\norm{f_M - f} < \veps$, proving the proposition.
+\end{proof}
+
+\begin{corollary}
+    The space SIF is dense in the space $\mc L^1$.
+\end{corollary}
+
+\begin{lemma}
+    If $f \colon X \to \bb R$ is integrable, then for all $\veps$ there exists a set $E$ such that $\mu(X \setminus E) < \infty$ and $\int_E f \dd{\mu} < \veps$.
+\end{lemma}
+
+\begin{proof}
+    Take a SIF $g$ such that $\norm{f - g}_1 < \veps$, then take $E$ to be the complement of $\carrier(g)$.
+\end{proof}
+
+\begin{lemma}
+    If $f \ge \chi_E$ a.e. for some measurable $E$, then $\int f \dd{\mu} \ge \mu(E)$.
+\end{lemma}
+
+\begin{proof}
+    We show that $\chi_E$ is integrable: Let $f_n \to f$ be a sequence of SIFs converging to $f$ pointwise and $f_n$ is Cauchy in mean. 
+\end{proof}
+
+\section{The Space $L^1$}
+
+One of our original goal for integration theory was to define the completion of $\mathrm{SIF}(X, \mc S, \mu, \mc B)$. We say two functions $f, g \in \mc L^1(X, \mc B)$ are equivalent iff $f = g$ a.e. Taking equivalence classes under this equivalence relation, we get the following definition:
+
+\begin{definition}
+    $L^1(X, \mc S, \mu, \mc B)$ denotes the set of integrable functions quotiented out by a.e.-equivalence. 
+\end{definition}
+
+From the previous section, one can deduce that there is a bijection between the Cauchy completion of $\mathrm{SIF}(X, \mc B)$ and $L^1(X, \mc B)$, and thus we have achieved our original goal.
+
+\begin{theorem}
+    $L^1$ is isometric to the Cauchy completion of $\mathrm{SIF}$ quotiented by a.e.-equivalence.
+\end{theorem}
+
+\begin{proof}
+    To prove that the integral is well-defined, we proved that if $f_n, g_n$ were equivalent mean Cauchy sequences (i.e. $\norm{f_n - g_n}_1 \to 0$), then if $f_n \to f$ in measure and $g_n \to g$ in measure, then $f = g$ a.e., that is, they belong to the same one $L^1$ equivalence class.
+\end{proof}
+
+\begin{corollary}
+    $L^1$ is complete.
+\end{corollary}
+
+\begin{proof}
+    Completions of a metric space are complete themselves.
+\end{proof}
+
+\section{The Indefinite Integral}
+
+\begin{definition}
+    If $f$ is an integrable function then we denote by $\mu_f \colon \mc S \to \mc B$ the \textbf{indefinite integral} of $f$, defined by $\mu_f(E) = \int_E f \dd{\mu} = \int f\chi_E  \dd{\mu}$.
+\end{definition}
+
+\begin{theorem}[Radon-Nikodym]
+    Sufficiently nice $\mc B$-valued measures are the indefinite integral of some integrable $f$.
+\end{theorem}
+
+\section{Interchange of Limit and Integral}
+
+We want to 
+
+\begin{theorem}[Egorov's Theorem]
+    If $E$ is subset of $X$ with finite measure $f_n \to f$ a.e. on $E$, then $f_n \to f$ almost uniformly on $E$.
+\end{theorem}
+
+\begin{proof}
+    I
+\end{proof}
+
+\begin{theorem}[Dominated Convergence Theorem]
+    If $f_n \to f$ a.e. and $\norm{f_n(x)} < g(x)$ for some integrable $g \colon X \to \bb R$ and all $x$, then $f_n$ is Cauchy in mean.
+\end{theorem}
+
+We specialize to the case where $\mc B = \bb R$.
+
+\begin{theorem}[Monotone Convergence Theorem]
+    
+\end{theorem}
+
+\section{$L^p$ Spaces}
+

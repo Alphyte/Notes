@@ -1,0 +1,24 @@
+\chapter{Oscillation}
+
+\section{Simple Harmonic Oscillation}
+
+Oscillations are omnipresent in physics. The equations of motion of a point connected to the end of a spring is determined by \nt{Hooke's law}, which states that $F(x) = -kx$, where $x$ is the displacement from the equilibrium position. Equivalently, the potential energy is given by $U(x) = kx^2/2$. The constant $k$ is known as the spring constant. 
+
+Systems described by equations of these form are said to be \nt{simple harmonic oscillation}. Many systems are closely approximable by these equations, such as the pendulum. 
+
+\section{Damped Oscillation}
+
+When we add a linear resistive force we can still solve the differential equation using techniques from linear algebra. We rewrite the equation $m\ddot x + b\dot x + kx = 0$ as \[\dv{t}\mqty[x \\ \dot x] = \mqty[0 & 1 \\ 2\beta & \omega_0^2]\mqty[x \\ \dot x]\] where we use $2\beta = b/m$, and $\omega_0 = \sqrt{k/m}$. and solve using the matrix exponential. In particular, we have the solutions $x = e^{rt}$ where $r$ are the solutions of the quadratic $r^2 + 2\beta r + \omega_0^2$, which gives us $-\beta \pm \sqrt{\beta^2 - \omega_0^2}$.
+
+\section{Driven Damped Oscillation: Sinusoidal case}
+
+Any damped oscillator will eventually lose its energy, and this can be prevented by driving it with a periodic signal. We call this driving force $F(t)$. Now, we consider the equation $m\ddot x + b \dot x + kx = F(t)$. 
+
+We can simplify this equation by dividing by $m$: $\ddot x + 2\beta \dot x + \omega_0^2 x = f(t)$. It can be seen that $D := \qty(\dv[2]{t} + 2\beta \dv{t} + \omega_0^2)\colon x \mapsto \ddot x + 2\beta \dot x + \omega_0^2x$ is a linear operator. Now, the first isomorphism theorem shows us that if we have one \emph{particular solution} $x_p$ such that $Dx_p = f$ then any solution of the system $Dx = f$ is equal to $x_p + x_h$, where $x_p$ is the particular solution and $x_h$ is a solution to $Dx_0 = 0$.
+
+
+If we consider the case where $f(t) = f_0\cos(\omega t)$, then for any solution to $Dx = f_0\cos(\omega t)$, there is a solution to $Dy = f_0\sin(\omega t)$ where $y(t) = x(t + \pi/\omega)$. Then, we define the complex function $z = x + iy$, which satisfies $Dz = f_0e^{i\omega t}$. We guess a solution of the form $z(t) = Ce^{i\omega t}$, and indeed, substituting this in gives us $\ddot{z} + 2\beta \dot z + \omega_0^2 = (-\omega^2 + 2i\beta \omega + \omega_0^2)Ce^{i\omega t}$. Thus, for \[ C = \frac{f_0}{-\omega^2 + 2i\beta \omega + \omega_0^2},\] $z = Ce^{i\omega t}$ is a solution to the system $Dz = f_0e^{i\omega t}$, and thus $x = \Re(z)$ is a solution to the system $Dx = f_0\cos(\omega t)$.
+
+In order to make taking the real part easier, we attempt to write $C$ in polar coordinates as $C = Ae^{-i\delta}$ where $A \in \bb R$. This is clearly given by \[A = \sqrt{\abs{C}^2} = \sqrt{\frac{f_0^2}{(\omega_0^2 - \omega^2)^2 + 4\beta^2 \omega^2}}.\] Now, to find the phase angle $\delta$, we see that \[Ae^{-i\delta} = \frac{f_0}{-\omega^2 + 2i\beta \omega + \omega_0^2}\] which can be rearranged into $A(-\omega^2 + 2i\beta \omega + \omega_0^2) = e^{i\delta}f_0$. Using the inverse tangent on the imaginary and real parts to find the phase, we get \[\delta = \arctan(\frac{2\beta \omega}{\omega_0^2 - \omega^2}).\] 
+
+Now, it is easy to express $x(t) = \operatorname{Re}(z) = A\cos(\omega t - \delta)$ in terms of the constants we found above. This is a particular solution to the system $Dx_p = f_0\cos(\omega t)$. Now, we just add a homogenous solution $x_h$ to $x_p$, which we found in the previous section. We now have the general form of a solution $x = A\cos(\omega t - \delta) + Be^{-\beta t}\cos(\omega_1 t - \delta_u)$. The second term in the solution is called the \emph{transient}, and fades very quickly relative to the first term when $\beta \gg 0$.

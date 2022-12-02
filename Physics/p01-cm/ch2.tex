@@ -1,0 +1,22 @@
+\chapter{Energy}
+
+\section{Kinetic Energy and the Work-Energy Theorem}
+
+The \nt{kinetic energy} $T$ of a particle is given by the quadratic form $m\dot r^2/2$. The derivative of the kinetic energy is given by $\dot T = m\dot r \cdot \ddot r = F(r) \cdot \dot r$. Integrating this on both sides, it can be seen that the change of kinetic energy as a particle moves along a path $r(t)$ from time $t_0$ to $t_f$ while subjected to a force $F(r)$ is equal to the \nt{work} done on that particle, \[ \int_{r(t_0)}^{r(t_f)} F(r) \dd{r}.\] This equivalence is called the \nt{work-energy theorem}.
+
+\section{Potential Energy}
+
+Suppose we have a system governed by a force field $F(r)$. We call $F$ a \nt{conservative force field} if $F$ has a potential, that is a function $U(r)$ such that $F = -\grad U$. Poincare's lemma tells us that this is equivalent to the condition that $\curl F = 0$. 
+
+The function $U$ is called \nt{potential energy} of the system. It is easy to see that in one dimension, there is always a potential, namely $U(r) = -\int_c^r F(r) \dd{r}$, where $c$ is any constant. In higher dimensions, it is necessary to verify that the curl is zero. 
+
+For conservative fields it can be seen that the equations of motion can be rewritten as $\ddot r = - \grad U(r)$. 
+
+\begin{example}[Gravity near the surface of the earth]
+    Gravity on a particle on mass $m$ near the surface of the earth can be described as a force field $F(h) = -mg$, which results in a potential dependant on the height $h$ of the particle $U(h) = mgh$.
+\end{example}
+
+Why is the negative sign there? If we consider the physical system governed only by gravity, $F(r) = -g$, we want a particle at a higher point in space to have more ``potential,'' as it can accumulate more kinetic energy as it falls.
+
+In fact, for any system governed by a conservative force field, it holds that $T + U$ remains constant. This is because \[\dv{t} T + U = F(r) \cdot \dot r + -F(r) \cdot \dot r = 0 \] by application of the work-energy theorem and the chain rule. This result is called the \nt{conservation of energy}.
+
